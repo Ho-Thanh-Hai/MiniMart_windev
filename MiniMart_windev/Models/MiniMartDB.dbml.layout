@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 19.25" name="MiniMartDB">
+  <DataContextMoniker Name="/MiniMartDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="37f2a7ee-a73c-480d-a874-25a72cc38ba7" absoluteBounds="3.5, 2.625, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/MiniMartDBDataContext/SanPham" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b78f8153-f996-4640-ad03-d7db9d9dafeb" absoluteBounds="3.515, 3.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fd177efd-a42a-41a0-83e5-94c41e872f5f" absoluteBounds="3.5, 5.75, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/MiniMartDBDataContext/PhieuNhap" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9387a817-8767-4d09-beae-1095cd795fcd" absoluteBounds="3.515, 6.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c710615c-d966-4c51-8293-7587ccd5c200" absoluteBounds="1.5, 14.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/MiniMartDBDataContext/VaiTro" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1a7b95c4-3bb9-43c6-ba33-c94e93d4d1f0" absoluteBounds="1.5150000000000001, 15.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c5565011-1526-422d-a6a1-6cd6ca1f8ab2" absoluteBounds="0.75, 5.75, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/MiniMartDBDataContext/NhaCungCap" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5cce9035-c741-4c2b-aed5-0d1fce757d7d" absoluteBounds="0.765, 6.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c3945e69-696f-4bbc-bd92-68bc68bdd85c" absoluteBounds="4.25, 14.625, 2, 1.3862939453124969">
+      <DataClassMoniker Name="/MiniMartDBDataContext/PhanQuyen" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bfd5b9db-bc4e-49bd-80ba-e1d6fb1818f2" absoluteBounds="4.265, 15.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3e48ceec-0c24-4273-a3c1-82f2b3687dd3" absoluteBounds="0.75, 11.375, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/MiniMartDBDataContext/NguoiDung" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a11b164d-0370-43f8-a6de-d7ee19de434f" absoluteBounds="0.765, 11.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="83ccc3f0-3570-4b60-b6ca-d9b920660ce7" absoluteBounds="3.5, 10, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/MiniMartDBDataContext/HoaDon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c26daa8e-7ea4-4b6e-8d13-3a1b3136105b" absoluteBounds="3.515, 10.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="19c3921d-0b29-4d25-b3b8-91db438ef5b8" absoluteBounds="0.75, 8.75, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/MiniMartDBDataContext/KhachHang" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b0793762-77ee-458c-be8c-13e6eba42c30" absoluteBounds="0.765, 9.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8aa27054-0103-4bc6-b891-26448819748a" absoluteBounds="1.5, 17.625, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/MiniMartDBDataContext/ChucNang" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1ac0ff7d-3d77-4388-b2dd-b66e1e99781d" absoluteBounds="1.5150000000000001, 18.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fd5cea5d-3ca1-4f2b-a535-979477b1a737" absoluteBounds="0.75, 3, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/MiniMartDBDataContext/DanhMuc" />
+      <nestedChildShapes>
+        <elementListCompartment Id="34d73ba3-a1a1-494a-82ac-e3ba103cc297" absoluteBounds="0.765, 3.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="578f8fd3-1289-4700-b134-e2ff69b23cb1" absoluteBounds="6.25, 4.25, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/MiniMartDBDataContext/ChiTietPhieuNhap" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c6634767-73d1-4247-aac5-6521ded12a3f" absoluteBounds="6.265, 4.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0ce63ebd-e096-4b25-9f0b-a4fae836fdd6" absoluteBounds="6.25, 0.75, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/MiniMartDBDataContext/ChiTietHoaDon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="54937ba9-a498-48e6-93bb-d4b83a669203" absoluteBounds="6.265, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 5.75); (3.125 : 5.375); (3.125 : 3.60659912109375); (3.5 : 3.60659912109375)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/NhaCungCap/NhaCungCap_SanPham" />
+      <nodes>
+        <classShapeMoniker Id="c5565011-1526-422d-a6a1-6cd6ca1f8ab2" />
+        <classShapeMoniker Id="37f2a7ee-a73c-480d-a874-25a72cc38ba7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.66670090494792); (3.04166666666667 : 6.66670090494792 : JumpStart); (3.20833333333333 : 6.66670090494792 : JumpEnd); (3.5 : 6.66670090494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/NhaCungCap/NhaCungCap_PhieuNhap" />
+      <nodes>
+        <classShapeMoniker Id="c5565011-1526-422d-a6a1-6cd6ca1f8ab2" />
+        <classShapeMoniker Id="fd177efd-a42a-41a0-83e5-94c41e872f5f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.5 : 15.3469962565104); (4.25 : 15.3469962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/VaiTro/VaiTro_PhanQuyen" />
+      <nodes>
+        <classShapeMoniker Id="c710615c-d966-4c51-8293-7587ccd5c200" />
+        <classShapeMoniker Id="c3945e69-696f-4bbc-bd92-68bc68bdd85c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 11.375); (3.125 : 11); (3.125 : 6.17709845247396); (3.5 : 6.17709845247396)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/NguoiDung/NguoiDung_PhieuNhap" />
+      <nodes>
+        <classShapeMoniker Id="3e48ceec-0c24-4273-a3c1-82f2b3687dd3" />
+        <classShapeMoniker Id="fd177efd-a42a-41a0-83e5-94c41e872f5f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.125 : 14.75); (2.125 : 13.3381982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/VaiTro/VaiTro_NguoiDung" />
+      <nodes>
+        <classShapeMoniker Id="c710615c-d966-4c51-8293-7587ccd5c200" />
+        <classShapeMoniker Id="3e48ceec-0c24-4273-a3c1-82f2b3687dd3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 11.7965023372396); (3.5 : 11.7965023372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/NguoiDung/NguoiDung_HoaDon" />
+      <nodes>
+        <classShapeMoniker Id="3e48ceec-0c24-4273-a3c1-82f2b3687dd3" />
+        <classShapeMoniker Id="83ccc3f0-3570-4b60-b6ca-d9b920660ce7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 10.2604484049479); (3.04166666666667 : 10.2604484049479 : JumpStart); (3.20833333333333 : 10.2604484049479 : JumpEnd); (3.5 : 10.2604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/KhachHang/KhachHang_HoaDon" />
+      <nodes>
+        <classShapeMoniker Id="19c3921d-0b29-4d25-b3b8-91db438ef5b8" />
+        <classShapeMoniker Id="83ccc3f0-3570-4b60-b6ca-d9b920660ce7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.5 : 18.3181469726563); (5.25 : 18.3181469726563); (5.25 : 16.0112939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/ChucNang/ChucNang_PhanQuyen" />
+      <nodes>
+        <classShapeMoniker Id="8aa27054-0103-4bc6-b891-26448819748a" />
+        <classShapeMoniker Id="c3945e69-696f-4bbc-bd92-68bc68bdd85c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.05894653320312); (3.04166666666667 : 4.05894653320312 : JumpStart); (3.20833333333333 : 4.05894653320312 : JumpEnd); (3.5 : 4.05894653320312)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/DanhMuc/DanhMuc_SanPham" />
+      <nodes>
+        <classShapeMoniker Id="fd5cea5d-3ca1-4f2b-a535-979477b1a737" />
+        <classShapeMoniker Id="37f2a7ee-a73c-480d-a874-25a72cc38ba7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 6.77089730989583); (5.79166666666667 : 6.77089730989583 : JumpStart); (5.95833333333333 : 6.77089730989583 : JumpEnd); (7.25 : 6.77089730989583); (7.25 : 6.02089680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/PhieuNhap/PhieuNhap_ChiTietPhieuNhap" />
+      <nodes>
+        <classShapeMoniker Id="fd177efd-a42a-41a0-83e5-94c41e872f5f" />
+        <classShapeMoniker Id="578f8fd3-1289-4700-b134-e2ff69b23cb1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 3.4374995); (5.79166666666667 : 3.4374995 : JumpStart); (5.95833333333333 : 3.4374995 : JumpEnd); (7.25 : 3.4374995); (7.25 : 4.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/SanPham/SanPham_ChiTietPhieuNhap" />
+      <nodes>
+        <classShapeMoniker Id="37f2a7ee-a73c-480d-a874-25a72cc38ba7" />
+        <classShapeMoniker Id="578f8fd3-1289-4700-b134-e2ff69b23cb1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 10); (5.875 : 9.625); (5.875 : 1.63544840494792); (6.25 : 1.63544840494792)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/HoaDon/HoaDon_ChiTietHoaDon" />
+      <nodes>
+        <classShapeMoniker Id="83ccc3f0-3570-4b60-b6ca-d9b920660ce7" />
+        <classShapeMoniker Id="0ce63ebd-e096-4b25-9f0b-a4fae836fdd6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 2.625); (4.5 : 2.10942510742187); (5.79166666666667 : 2.10942510742187 : JumpStart); (5.95833333333333 : 2.10942510742187 : JumpEnd); (6.25 : 2.10942510742187)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MiniMartDBDataContext/SanPham/SanPham_ChiTietHoaDon" />
+      <nodes>
+        <classShapeMoniker Id="37f2a7ee-a73c-480d-a874-25a72cc38ba7" />
+        <classShapeMoniker Id="0ce63ebd-e096-4b25-9f0b-a4fae836fdd6" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
