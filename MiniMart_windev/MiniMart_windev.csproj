@@ -203,6 +203,9 @@
     <Compile Include="Models\MiniMartDB_Bridge.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="..\Database\QuanLySieuThiMini.sql">
+      <LogicalName>QuanLySieuThiMini.sql</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BaoCao\frmSalesStatistics.resx">
       <DependentUpon>frmSalesStatistics.cs</DependentUpon>
     </EmbeddedResource>

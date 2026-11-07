@@ -11,6 +11,8 @@ namespace MiniMart_windev.Forms.HeThong
         public frmLogin()
         {
             InitializeComponent();
+            txtTenDangNhap.Text = "admin";
+            txtMatKhau.Text = "123456";
         }
 
         private void chkHienMatKhau_CheckedChanged(object sender, EventArgs e)

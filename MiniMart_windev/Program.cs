@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +16,15 @@ namespace MiniMart_windev
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Tự động nhận diện SQL Server & tự khởi tạo CSDL lần đầu nếu máy chưa có
+            try
+            {
+                string statusMsg;
+                Helpers.DatabaseHelper.EnsureDatabaseAutoSetup(out statusMsg);
+            }
+            catch { }
+
             Application.Run(new Forms.HeThong.frmLogin());
         }
     }

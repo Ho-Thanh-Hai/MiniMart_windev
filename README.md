@@ -59,42 +59,30 @@
 
 ---
 
-## 🛠 HƯỚNG DẪN CÀI ĐẶT & CHẠY DỰ ÁN
+## 🚀 HƯỚNG DẪN KHỞI CHẠY (ZERO CONFIGURATION - TẢI VỀ CHẠY LUÔN)
 
-### Yêu cầu môi trường
-- Hệ điều hành: Windows 10 / Windows 11.
-- Môi trường phát triển: **Visual Studio 2019** hoặc **Visual Studio 2022** (khuyến nghị có cài đặt workload *.NET Desktop Development*).
-- Cơ sở dữ liệu: **Microsoft SQL Server** (bản 2014, 2017, 2019, 2022 hoặc SQL Server Express / LocalDB).
-- Microsoft Reporting Services Projects Extension (để xem/chỉnh sửa file `.rdlc` nếu cần).
+> 💡 **Cơ chế Tự động hóa Đặc biệt:** Hệ thống đã được tích hợp bộ công cụ **Auto-Discovery & Auto-Migration CSDL**. Khi khởi chạy trên bất kỳ máy tính Windows nào, ứng dụng sẽ **tự động dò tìm máy chủ SQL Server** đang hoạt động (`.`, `.\SQLEXPRESS`, `(localdb)\MSSQLLocalDB`, `localhost`...) và **tự động khởi tạo Database `QuanLySieuThiMini` cùng toàn bộ 12 bảng và dữ liệu mẫu** nếu máy đó chưa có! Người dùng hoàn toàn không cần phải tạo CSDL thủ công bằng SSMS!
 
-### Các bước thực hiện
+### Cách 1: Khởi chạy siêu tốc 1-Click (Khuyên dùng)
+* Nhấp đúp chuột vào tệp **`Chay_Phan_Mem.bat`** tại thư mục gốc của dự án. 
+* Phần mềm sẽ tự động mở lên ngay lập tức!
 
-#### Bước 1: Khởi tạo Cơ sở dữ liệu SQL Server
-1. Mở **SQL Server Management Studio (SSMS)** và kết nối tới SQL Server của bạn.
-2. Mở file script SQL có sẵn trong thư mục: [`Database/QuanLySieuThiMini.sql`](Database/QuanLySieuThiMini.sql).
-3. Bấm **Execute (F5)** để tự động tạo cơ sở dữ liệu `QuanLySieuThiMini`, các bảng, ràng buộc khóa ngoại và dữ liệu mẫu (Seed Data).
+### Cách 2: Khởi chạy từ Visual Studio
+1. Mở tệp giải pháp **`MiniMart_windev.sln`** bằng Visual Studio 2019 hoặc 2022.
+2. Nhấn phím **F5** (hoặc bấm nút **Start** ▶).
+3. Ứng dụng sẽ tự động kết nối và hiển thị màn hình Đăng nhập!
 
-#### Bước 2: Mở và cấu hình giải pháp trong Visual Studio
-1. Mở file giải pháp **`MiniMart_windev.sln`** bằng Visual Studio.
-2. Kiểm tra chuỗi kết nối trong file [`MiniMart_windev/App.config`](MiniMart_windev/App.config) (hoặc sử dụng form cấu hình kết nối `frmConnectionConfig` ngay trong phần mềm):
-   ```xml
-   <connectionStrings>
-     <add name="MiniMart_windev.Properties.Settings.QuanLySieuThiMiniConnectionString"
-          connectionString="Data Source=.;Initial Catalog=QuanLySieuThiMini;Integrated Security=True;Encrypt=False;Trust Server Certificate=True"
-          providerName="System.Data.SqlClient" />
-   </connectionStrings>
-   ```
-   *(Thay đổi `Data Source=.` thành tên Server SQL của máy bạn nếu dùng Named Instance như `.\SQLEXPRESS`).*
+### 🔑 Tài khoản đăng nhập hệ thống
 
-#### Bước 3: Khởi chạy chương trình
-1. Bấm **F5** (hoặc nút **Start**) trong Visual Studio để biên dịch và chạy phần mềm.
-2. Đăng nhập bằng một trong các tài khoản demo sau:
+Hệ thống đã **tự động điền sẵn** tài khoản Quản trị viên trên màn hình Đăng nhập để tiện kiểm thử nhanh:
 
 | Tên đăng nhập | Mật khẩu | Vai trò | Quyền hạn truy cập |
 | :--- | :---: | :---: | :--- |
-| **`admin`** | **`123456`** | **Quản trị viên** | **Toàn quyền hệ thống:** Quản lý tài khoản, phân quyền, cấu hình, danh mục, kho, bán hàng và tất cả báo cáo. |
-| **`thungan01`** | **`123456`** | **Thu ngân** | Bán hàng (POS), tra cứu hóa đơn, in hóa đơn, quản lý khách hàng. *(Các menu hệ thống, quản lý kho tự động bị ẩn/khóa)*. |
+| **`admin`** *(mặc định)* | **`123456`** | **Quản trị viên** | **Toàn quyền hệ thống:** Quản lý tài khoản, phân quyền, cấu hình, danh mục, kho, bán hàng và tất cả 03 báo cáo RDLC. |
+| **`thungan01`** | **`123456`** | **Thu ngân** | Bán hàng tại quầy (POS), tra cứu & in hóa đơn, quản lý khách hàng. *(Các menu hệ thống, quản lý kho tự động bị ẩn/khóa)*. |
 | **`thukho01`** | **`123456`** | **Thủ kho** | Quản lý sản phẩm, danh mục, nhà cung cấp, nhập kho hàng hóa, báo cáo tồn kho & cảnh báo. *(Menu bán hàng và hệ thống tự động khóa)*. |
+
+*(Người dùng chỉ việc bấm nút **"Đăng nhập"** hoặc phím **Enter** là vào thẳng giao diện chính Dashboard!)*
 
 ---
 
