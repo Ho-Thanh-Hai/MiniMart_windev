@@ -100,8 +100,28 @@ namespace MiniMart_windev.Forms.HeThong
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Không thể kết nối đến máy chủ CSDL!\nChi tiết: " + ex.Message,
-                    "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string currentServer = "";
+                try
+                {
+                    System.Data.SqlClient.SqlConnectionStringBuilder b = new System.Data.SqlClient.SqlConnectionStringBuilder(DatabaseHelper.ActiveConnectionString);
+                    currentServer = b.DataSource;
+                }
+                catch { }
+
+                var result = MessageBox.Show(
+                    $"Không thể kết nối đến máy chủ SQL Server [{(string.IsNullOrEmpty(currentServer) ? "mặc định" : currentServer)}]!\n\n" +
+                    "Nguyên nhân thường gặp khi chạy trên máy tính mới:\n" +
+                    "1. Bạn chưa chạy file kịch bản 'Database/QuanLySieuThiMini.sql' trong SQL Server để tạo cơ sở dữ liệu.\n" +
+                    "2. Tên máy chủ SQL Server của máy bạn khác với cấu hình (ví dụ: máy bạn dùng '.' hoặc '.\\SQLEXPRESS' thay vì '.\\MSSQLSERVER02').\n\n" +
+                    "Chi tiết lỗi từ SQL Server:\n" + ex.Message + "\n\n" +
+                    "👉 Bạn có muốn mở màn hình 'Cấu hình kết nối máy chủ' ngay bây giờ để chọn lại Server không?",
+                    "Lỗi kết nối CSDL", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    frmConnectionConfig configForm = new frmConnectionConfig();
+                    configForm.ShowDialog();
+                }
             }
         }
 

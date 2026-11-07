@@ -1,4 +1,4 @@
-﻿using MiniMart_windev.Helpers;
+using MiniMart_windev.Helpers;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -18,8 +18,8 @@ namespace MiniMart_windev.Forms.HeThong
         {
             try
             {
-                // Đọc chuỗi kết nối hiện tại từ App.config
-                string connStr = ConfigurationManager.ConnectionStrings["MiniMart_windev.Properties.Settings.QuanLySieuThiMiniConnectionString"]?.ConnectionString;
+                // Đọc chuỗi kết nối hiện tại từ DatabaseHelper hoặc App.config
+                string connStr = DatabaseHelper.ActiveConnectionString;
                 if (!string.IsNullOrEmpty(connStr))
                 {
                     SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connStr);
@@ -148,11 +148,20 @@ namespace MiniMart_windev.Forms.HeThong
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("connectionStrings");
 
-                // Cập nhật Properties.Settings runtime
-                MiniMart_windev.Properties.Settings.Default["QuanLySieuThiMiniConnectionString"] = newConnStr;
-                MiniMart_windev.Properties.Settings.Default.Save();
+                // Cập nhật DatabaseHelper cho phiên chạy hiện tại ngay lập tức
+                DatabaseHelper.ActiveConnectionString = newConnStr;
 
-                MessageBox.Show("Đã lưu cấu hình kết nối vào App.config thành công!\nỨng dụng sẽ sử dụng cấu hình này.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                try
+                {
+                    MiniMart_windev.Properties.Settings.Default["QuanLySieuThiMiniConnectionString"] = newConnStr;
+                    MiniMart_windev.Properties.Settings.Default.Save();
+                }
+                catch
+                {
+                    // Properties.Settings có thể ở chế độ ReadOnly tại runtime, bỏ qua vì đã lưu App.config và DatabaseHelper
+                }
+
+                MessageBox.Show("Đã lưu cấu hình kết nối thành công!\nỨng dụng sẽ sử dụng cấu hình mới này ngay lập tức.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             catch (Exception ex)

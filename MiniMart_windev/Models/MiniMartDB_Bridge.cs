@@ -4,6 +4,21 @@ using MiniMart_windev.Models;
 
 namespace MiniMart_windev.Models
 {
+    public partial class MiniMartDBDataContext
+    {
+        partial void OnCreated()
+        {
+            string activeConn = Helpers.DatabaseHelper.ActiveConnectionString;
+            if (!string.IsNullOrEmpty(activeConn) && this.Connection != null)
+            {
+                if (this.Connection.State == System.Data.ConnectionState.Closed)
+                {
+                    this.Connection.ConnectionString = activeConn;
+                }
+            }
+        }
+    }
+
     public partial class ChiTietPhieuNhap
     {
         public decimal DonGiaNhap
@@ -62,6 +77,6 @@ namespace QuanLyBanHangKho.Properties
     {
         private static Settings defaultInstance = new Settings();
         public static Settings Default => defaultInstance;
-        public string QuanLyBanHangKhoConnectionString => global::MiniMart_windev.Properties.Settings.Default.QuanLySieuThiMiniConnectionString;
+        public string QuanLyBanHangKhoConnectionString => global::MiniMart_windev.Helpers.DatabaseHelper.ActiveConnectionString;
     }
 }
