@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -34,6 +34,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
@@ -44,9 +47,45 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\DanhMuc\frmInventoryReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DanhMuc\frmInventoryReport.Designer.cs">
+      <DependentUpon>frmInventoryReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NghiepVu\frmInvoicePrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NghiepVu\frmInvoicePrint.Designer.cs">
+      <DependentUpon>frmInvoicePrint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NghiepVu\DataSetHoaDon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetHoaDon.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +94,12 @@
     </Compile>
     <Compile Include="Forms\BaoCao\frmInventoryReport.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BaoCao\frmRevenuePrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BaoCao\frmRevenuePrint.Designer.cs">
+      <DependentUpon>frmRevenuePrint.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\BaoCao\frmRevenueReport.cs">
       <SubType>Form</SubType>
@@ -65,35 +110,74 @@
     <Compile Include="Forms\DanhMuc\frmCategoryManagement.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\DanhMuc\frmCategoryManagement.Designer.cs">
+      <DependentUpon>frmCategoryManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DanhMuc\frmProductManagement.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DanhMuc\frmProductManagement.Designer.cs">
+      <DependentUpon>frmProductManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DanhMuc\frmStockReceipt.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\DanhMuc\frmStockReceipt.Designer.cs">
+      <DependentUpon>frmStockReceipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DanhMuc\frmStockReceiptDetail.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DanhMuc\frmStockReceiptDetail.Designer.cs">
+      <DependentUpon>frmStockReceiptDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DanhMuc\frmSupplierManagement.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\DanhMuc\frmSupplierManagement.Designer.cs">
+      <DependentUpon>frmSupplierManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HeThong\frmChangePassword.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HeThong\frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\HeThong\frmConnectionConfig.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\HeThong\frmConnectionConfig.Designer.cs">
+      <DependentUpon>frmConnectionConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HeThong\frmLogin.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HeThong\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HeThong\frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HeThong\frmAbout.Designer.cs">
+      <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\HeThong\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\HeThong\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HeThong\frmRoleManagement.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\HeThong\frmRoleManagement.Designer.cs">
+      <DependentUpon>frmRoleManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HeThong\frmUserManagement.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HeThong\frmUserManagement.Designer.cs">
+      <DependentUpon>frmUserManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\NghiepVu\frmCustomerManagement.cs">
       <SubType>Form</SubType>
@@ -108,16 +192,92 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helpers\CurrentUserSession.cs" />
+    <Compile Include="Helpers\ThemeHelper.cs" />
     <Compile Include="Helpers\SecurityHelper.cs" />
     <Compile Include="Models\MiniMartDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MiniMartDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\MiniMartDB_Bridge.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\BaoCao\frmSalesStatistics.resx">
+      <DependentUpon>frmSalesStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BaoCao\rptDoanhThu.rdlc">
+      <LogicalName>MiniMart_windev.Forms.BaoCao.rptDoanhThu.rdlc</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BaoCao\frmRevenuePrint.resx">
+      <DependentUpon>frmRevenuePrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HeThong\frmUserManagement.resx">
+      <DependentUpon>frmUserManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NghiepVu\frmCustomerManagement.resx">
+      <DependentUpon>frmCustomerManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NghiepVu\frmInvoiceDetail.resx">
+      <DependentUpon>frmInvoiceDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NghiepVu\frmInvoiceReport.resx">
+      <DependentUpon>frmInvoiceReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NghiepVu\frmSalesInvoice.resx">
+      <DependentUpon>frmSalesInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DanhMuc\rptInventory.rdlc">
+      <LogicalName>QuanLyBanHangKho.rptInventory.rdlc</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NghiepVu\ReportHoaDon.rdlc">
+      <LogicalName>QuanLyBanHangKho.ReportHoaDon.rdlc</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DanhMuc\frmInventoryReport.resx">
+      <DependentUpon>frmInventoryReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NghiepVu\frmInvoicePrint.resx">
+      <DependentUpon>frmInvoicePrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Forms\NghiepVu\DataSetHoaDon.xsc">
+      <DependentUpon>DataSetHoaDon.xsd</DependentUpon>
+    </None>
+    <None Include="Forms\NghiepVu\DataSetHoaDon.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetHoaDon.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Forms\NghiepVu\DataSetHoaDon.xss">
+      <DependentUpon>DataSetHoaDon.xsd</DependentUpon>
+    </None>
+    <EmbeddedResource Include="Forms\BaoCao\frmInventoryReport.resx">
+      <DependentUpon>frmInventoryReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BaoCao\frmRevenueReport.resx">
+      <DependentUpon>frmRevenueReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\HeThong\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DanhMuc\frmCategoryManagement.resx">
+      <DependentUpon>frmCategoryManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DanhMuc\frmProductManagement.resx">
+      <DependentUpon>frmProductManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DanhMuc\frmStockReceipt.resx">
+      <DependentUpon>frmStockReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DanhMuc\frmStockReceiptDetail.resx">
+      <DependentUpon>frmStockReceiptDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DanhMuc\frmSupplierManagement.resx">
+      <DependentUpon>frmSupplierManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HeThong\frmAbout.resx">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HeThong\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -144,6 +304,27 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Forms\BaoCao\frmInventoryReport.Designer.cs">
+      <DependentUpon>frmInventoryReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BaoCao\frmRevenueReport.Designer.cs">
+      <DependentUpon>frmRevenueReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BaoCao\frmSalesStatistics.Designer.cs">
+      <DependentUpon>frmSalesStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NghiepVu\frmCustomerManagement.Designer.cs">
+      <DependentUpon>frmCustomerManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NghiepVu\frmInvoiceDetail.Designer.cs">
+      <DependentUpon>frmInvoiceDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NghiepVu\frmInvoiceReport.Designer.cs">
+      <DependentUpon>frmInvoiceReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NghiepVu\frmSalesInvoice.Designer.cs">
+      <DependentUpon>frmSalesInvoice.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
