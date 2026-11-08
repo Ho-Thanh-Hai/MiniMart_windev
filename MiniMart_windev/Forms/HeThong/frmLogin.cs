@@ -119,13 +119,26 @@ namespace MiniMart_windev.Forms.HeThong
                 "Chào mừng", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             this.Hide();
-            frmMain mainForm = new frmMain();
-            mainForm.ShowDialog();
+            using (frmMain mainForm = new frmMain())
+            {
+                mainForm.ShowDialog();
 
-            // Khi người dùng bấm Đăng xuất ở Main tắt đi thì mở lại Login
-            this.Show();
-            txtMatKhau.Clear();
-            txtTenDangNhap.Focus();
+                // Chỉ hiện lại Login nếu người dùng chủ động Đăng xuất và form Login chưa bị Dispose
+                if (!this.IsDisposed)
+                {
+                    if (mainForm.IsLoggingOut)
+                    {
+                        this.Show();
+                        txtMatKhau.Clear();
+                        txtTenDangNhap.Focus();
+                    }
+                    else
+                    {
+                        // Người dùng tắt form Main (Thoát) -> Đóng luôn form Login để kết thúc ứng dụng hoàn toàn
+                        this.Close();
+                    }
+                }
+            }
         }
 
         private void btnThoat_Click(object sender, EventArgs e)

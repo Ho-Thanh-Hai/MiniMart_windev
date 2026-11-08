@@ -11,6 +11,8 @@ namespace MiniMart_windev.Forms.HeThong
 {
     public partial class frmMain : Form
     {
+        public bool IsLoggingOut { get; private set; } = false;
+
         public frmMain()
         {
             InitializeComponent();
@@ -129,6 +131,7 @@ namespace MiniMart_windev.Forms.HeThong
             if (MessageBox.Show("Bạn có chắc muốn đăng xuất khỏi hệ thống?", "Xác nhận",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                IsLoggingOut = true;
                 CurrentUserSession.ClearSession();
                 this.Close();
             }
