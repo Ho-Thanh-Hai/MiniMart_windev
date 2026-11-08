@@ -366,6 +366,42 @@ namespace MiniMart_windev.Helpers
                 ThemeChanged -= onThemeChanged;
             };
 
+            // Tự động tạo thanh Header (panelTop) chuẩn cho các form in ấn/báo cáo chứa ReportViewer nếu chưa có
+            bool hasReportViewer = false;
+            foreach (Control c in form.Controls)
+            {
+                if (c.GetType().FullName != null && c.GetType().FullName.Contains("ReportViewer"))
+                {
+                    hasReportViewer = true;
+                    break;
+                }
+            }
+
+            if (hasReportViewer && form.Controls.Find("panelTop", true).Length == 0)
+            {
+                Panel topHeader = new Panel
+                {
+                    Name = "panelTop",
+                    Dock = DockStyle.Top,
+                    Height = 46,
+                    BackColor = IsDarkMode ? Color.FromArgb(45, 45, 48) : Color.FromArgb(0, 122, 204)
+                };
+
+                Label lblReportTitle = new Label
+                {
+                    Name = "lblTopHeaderTitle",
+                    Text = "📄 " + form.Text,
+                    Font = new Font("Segoe UI", 11F, FontStyle.Bold),
+                    ForeColor = Color.White,
+                    AutoSize = true,
+                    Location = new Point(16, 12)
+                };
+                topHeader.Controls.Add(lblReportTitle);
+
+                form.Controls.Add(topHeader);
+                topHeader.SendToBack();
+            }
+
             // Thêm nút Theme vào Form nếu chưa có
             if (form.Controls.Find("btnToggleTheme", true).Length == 0)
             {
@@ -373,7 +409,7 @@ namespace MiniMart_windev.Helpers
                 {
                     Name = "btnToggleTheme",
                     Text = IsDarkMode ? "Light Mode" : "Dark Mode",
-                    Size = new Size(100, 32),
+                    Size = new Size(100, 30),
                     Anchor = AnchorStyles.Top | AnchorStyles.Right,
                     FlatStyle = FlatStyle.Flat,
                     Cursor = Cursors.Hand,
@@ -382,7 +418,6 @@ namespace MiniMart_windev.Helpers
                     ForeColor = Color.White
                 };
                 btnTheme.FlatAppearance.BorderSize = 0;
-                btnTheme.Location = new Point(form.ClientSize.Width - 110, 8);
 
                 btnTheme.Click += (s, e) =>
                 {
@@ -395,7 +430,11 @@ namespace MiniMart_windev.Helpers
 
                 if (container != form)
                 {
-                    btnTheme.Location = new Point(container.ClientSize.Width - 110, 10);
+                    btnTheme.Location = new Point(container.ClientSize.Width - 110, 8);
+                }
+                else
+                {
+                    btnTheme.Location = new Point(form.ClientSize.Width - 110, 8);
                 }
 
                 container.Controls.Add(btnTheme);
@@ -409,7 +448,7 @@ namespace MiniMart_windev.Helpers
                 {
                     Name = "btnVeMenuChinh",
                     Text = "Về Menu Chính",
-                    Size = new Size(115, 32),
+                    Size = new Size(120, 30),
                     Anchor = AnchorStyles.Top | AnchorStyles.Right,
                     FlatStyle = FlatStyle.Flat,
                     Cursor = Cursors.Hand,
@@ -430,11 +469,11 @@ namespace MiniMart_windev.Helpers
 
                 if (container != form)
                 {
-                    btnBack.Location = new Point(container.ClientSize.Width - 235, 10);
+                    btnBack.Location = new Point(container.ClientSize.Width - 238, 8);
                 }
                 else
                 {
-                    btnBack.Location = new Point(form.ClientSize.Width - 235, 8);
+                    btnBack.Location = new Point(form.ClientSize.Width - 238, 8);
                 }
 
                 container.Controls.Add(btnBack);
