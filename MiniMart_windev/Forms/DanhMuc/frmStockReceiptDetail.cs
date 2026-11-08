@@ -177,33 +177,41 @@ namespace MiniMart_windev.Forms.DanhMuc
 
         private void dgvChiTietPhieuNhap_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
+            if (e.RowIndex < 0 || e.RowIndex >= dgvChiTietPhieuNhap.Rows.Count)
                 return;
 
-            DataGridViewRow row = dgvChiTietPhieuNhap.Rows[e.RowIndex];
-
-            if (row.Cells["MaPhieuNhap"].Value == null ||
-                row.Cells["MaSanPham"].Value == null)
-                return;
-
-            int maPN = Convert.ToInt32(row.Cells["MaPhieuNhap"].Value);
-            string maSP = row.Cells["MaSanPham"].Value?.ToString();
-
-            ChiTietPhieuNhap ct = db.GetTable<ChiTietPhieuNhap>()
-                .FirstOrDefault(x => x.MaPhieuNhap == maPN &&
-                                     x.MaSanPham == maSP);
-
-            if (ct == null)
+            try
             {
-                MessageBox.Show("Không tìm thấy chi tiết phiếu nhập!");
-                return;
+                DataGridViewRow row = dgvChiTietPhieuNhap.Rows[e.RowIndex];
+
+                if (row.Cells["MaPhieuNhap"].Value == null ||
+                    row.Cells["MaSanPham"].Value == null)
+                    return;
+
+                if (!int.TryParse(row.Cells["MaPhieuNhap"].Value.ToString(), out int maPN))
+                    return;
+
+                string maSP = row.Cells["MaSanPham"].Value?.ToString();
+
+                ChiTietPhieuNhap ct = db.GetTable<ChiTietPhieuNhap>()
+                    .FirstOrDefault(x => x.MaPhieuNhap == maPN &&
+                                         x.MaSanPham == maSP);
+
+                if (ct == null)
+                {
+                    return;
+                }
+
+                cboMaPhieuNhap.SelectedValue = maPN;
+                cboSanPham.SelectedValue = maSP;
+
+                txtSoLuong.Text = ct.SoLuong.ToString();
+                txtDonGiaNhap.Text = ct.DonGiaNhap.ToString("0");
             }
-
-            cboMaPhieuNhap.SelectedValue = maPN;
-            cboSanPham.SelectedValue = maSP;
-
-            txtSoLuong.Text = ct.SoLuong.ToString();
-            txtDonGiaNhap.Text = ct.DonGiaNhap.ToString("0");
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Lỗi click dòng chi tiết phiếu nhập: " + ex.Message);
+            }
         }
 
         private void btnSua_Click(object sender, EventArgs e)

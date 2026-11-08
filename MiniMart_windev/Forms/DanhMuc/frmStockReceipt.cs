@@ -176,30 +176,38 @@ namespace MiniMart_windev.Forms.DanhMuc
 
         private void dgvPhieuNhap_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
+            if (e.RowIndex < 0 || e.RowIndex >= dgvPhieuNhap.Rows.Count)
                 return;
 
-            int maPN = Convert.ToInt32(
-                dgvPhieuNhap.Rows[e.RowIndex].Cells["MaPhieuNhap"].Value);
+            try
+            {
+                object val = dgvPhieuNhap.Rows[e.RowIndex].Cells["MaPhieuNhap"].Value;
+                if (val == null || !int.TryParse(val.ToString(), out int maPN))
+                    return;
 
-            PhieuNhap pn = db.GetTable<PhieuNhap>()
-                .FirstOrDefault(p => p.MaPhieuNhap == maPN);
+                PhieuNhap pn = db.GetTable<PhieuNhap>()
+                    .FirstOrDefault(p => p.MaPhieuNhap == maPN);
 
-            if (pn == null)
-                return;
+                if (pn == null)
+                    return;
 
-            txtMaPhieuNhap.Text = pn.MaPhieuNhap.ToString();
-            cboNhaCungCap.SelectedValue = pn.MaNCC;
-            txtNguoiLap.Text = pn.NguoiDung.HoTen;
+                txtMaPhieuNhap.Text = pn.MaPhieuNhap.ToString();
+                cboNhaCungCap.SelectedValue = pn.MaNCC;
+                txtNguoiLap.Text = pn.NguoiDung?.HoTen ?? "";
 
-            DateTime ngay = pn.NgayNhap ?? DateTime.Now;
-            dtpNgayNhap.MaxDate = ngay.Date > DateTime.Today
-                ? ngay.Date.AddDays(1).AddTicks(-1)
-                : DateTime.Today.AddDays(1).AddTicks(-1);
+                DateTime ngay = pn.NgayNhap ?? DateTime.Now;
+                dtpNgayNhap.MaxDate = ngay.Date > DateTime.Today
+                    ? ngay.Date.AddDays(1).AddTicks(-1)
+                    : DateTime.Today.AddDays(1).AddTicks(-1);
 
-            dtpNgayNhap.Value = ngay;
+                dtpNgayNhap.Value = ngay;
 
-            txtTongTien.Text = (pn.TongTien ?? 0).ToString("#,##0");
+                txtTongTien.Text = (pn.TongTien ?? 0).ToString("#,##0");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Lỗi click dòng phiếu nhập: " + ex.Message);
+            }
         }
 
         private void btnSua_Click(object sender, EventArgs e)

@@ -247,16 +247,27 @@ namespace MiniMart_windev.Forms.HeThong
 
         private void dgvNguoiDung_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.RowIndex < dgvNguoiDung.Rows.Count)
             {
-                DataGridViewRow row = dgvNguoiDung.Rows[e.RowIndex];
-                selectedUserId = Convert.ToInt32(row.Cells["MaNguoiDung"].Value);
-                txtTenDangNhap.Text = row.Cells["TenDangNhap"].Value.ToString();
-                txtTenDangNhap.ReadOnly = true; // Không cho sửa username
-                txtHoTen.Text = row.Cells["HoTen"].Value.ToString();
-                cboVaiTro.SelectedValue = row.Cells["MaVaiTro"].Value;
-                chkTrangThai.Checked = row.Cells["TrangThai"].Value.ToString() == "Hoạt động";
-                txtMatKhau.Clear();
+                try
+                {
+                    DataGridViewRow row = dgvNguoiDung.Rows[e.RowIndex];
+                    if (row.Cells["MaNguoiDung"].Value != null && int.TryParse(row.Cells["MaNguoiDung"].Value.ToString(), out int uId))
+                    {
+                        selectedUserId = uId;
+                    }
+                    txtTenDangNhap.Text = row.Cells["TenDangNhap"].Value?.ToString() ?? "";
+                    txtTenDangNhap.ReadOnly = true; // Không cho sửa username
+                    txtHoTen.Text = row.Cells["HoTen"].Value?.ToString() ?? "";
+                    cboVaiTro.SelectedValue = row.Cells["MaVaiTro"].Value;
+                    string trangThaiStr = row.Cells["TrangThai"].Value?.ToString() ?? "";
+                    chkTrangThai.Checked = trangThaiStr == "Hoạt động" || trangThaiStr.Contains("hoạt động") || trangThaiStr == "True";
+                    txtMatKhau.Clear();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Lỗi click dòng người dùng: " + ex.Message);
+                }
             }
         }
     }

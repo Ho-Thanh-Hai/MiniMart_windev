@@ -273,27 +273,41 @@ namespace MiniMart_windev.Forms.NghiepVu
         }
 
         private void dgvChiTietHoaDon_CellClick(
-    object sender, DataGridViewCellEventArgs e)
+            object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.RowIndex < dgvChiTietHoaDon.Rows.Count)
             {
-                DataGridViewRow row = dgvChiTietHoaDon.Rows[e.RowIndex];
+                try
+                {
+                    DataGridViewRow row = dgvChiTietHoaDon.Rows[e.RowIndex];
+                    if (dgvChiTietHoaDon.Columns.Contains("MaSanPham") && row.Cells["MaSanPham"].Value != null)
+                    {
+                        string maSP = row.Cells["MaSanPham"].Value.ToString();
+                        cboSanPham.SelectedValue = maSP;
+                    }
 
-                string maSP = row.Cells["MaSanPham"].Value?.ToString();
+                    if (dgvChiTietHoaDon.Columns.Contains("SoLuong") && row.Cells["SoLuong"].Value != null &&
+                        decimal.TryParse(row.Cells["SoLuong"].Value.ToString(), out decimal sl))
+                    {
+                        nudSoLuong.Value = Math.Min(Math.Max(sl, nudSoLuong.Minimum), nudSoLuong.Maximum);
+                    }
 
-                cboSanPham.SelectedValue = maSP;
+                    if (dgvChiTietHoaDon.Columns.Contains("DonGia") && row.Cells["DonGia"].Value != null &&
+                        decimal.TryParse(row.Cells["DonGia"].Value.ToString(), out decimal dg))
+                    {
+                        txtDonGia.Text = dg.ToString("N0");
+                    }
 
-                nudSoLuong.Value = Convert.ToDecimal(
-                    row.Cells["SoLuong"].Value
-                );
-
-                txtDonGia.Text = Convert.ToDecimal(
-                    row.Cells["DonGia"].Value
-                ).ToString("N0");
-
-                txtThanhTien.Text = Convert.ToDecimal(
-                    row.Cells["ThanhTien"].Value
-                ).ToString("N0");
+                    if (dgvChiTietHoaDon.Columns.Contains("ThanhTien") && row.Cells["ThanhTien"].Value != null &&
+                        decimal.TryParse(row.Cells["ThanhTien"].Value.ToString(), out decimal tt))
+                    {
+                        txtThanhTien.Text = tt.ToString("N0");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Lỗi click dòng chi tiết hóa đơn: " + ex.Message);
+                }
             }
         }
 

@@ -135,19 +135,26 @@ namespace MiniMart_windev.Forms.DanhMuc
         {
             if (dgvDanhMuc.CurrentRow != null)
             {
-                txtMaDanhMuc.Text = dgvDanhMuc.CurrentRow.Cells["MaDanhMuc"].Value.ToString();
-                txtTenDanhMuc.Text = dgvDanhMuc.CurrentRow.Cells["TenDanhMuc"].Value.ToString();
-                txtMoTa.Text = dgvDanhMuc.CurrentRow.Cells["MoTa"].Value?.ToString();
+                txtMaDanhMuc.Text = dgvDanhMuc.CurrentRow.Cells["MaDanhMuc"].Value?.ToString() ?? "";
+                txtTenDanhMuc.Text = dgvDanhMuc.CurrentRow.Cells["TenDanhMuc"].Value?.ToString() ?? "";
+                txtMoTa.Text = dgvDanhMuc.CurrentRow.Cells["MoTa"].Value?.ToString() ?? "";
             }
         }
 
         private void dgvDanhMuc_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.RowIndex < dgvDanhMuc.Rows.Count)
             {
-                txtMaDanhMuc.Text = dgvDanhMuc.Rows[e.RowIndex].Cells["MaDanhMuc"].Value.ToString();
-                txtTenDanhMuc.Text = dgvDanhMuc.Rows[e.RowIndex].Cells["TenDanhMuc"].Value.ToString();
-                txtMoTa.Text = dgvDanhMuc.Rows[e.RowIndex].Cells["MoTa"].Value?.ToString();
+                try
+                {
+                    txtMaDanhMuc.Text = dgvDanhMuc.Rows[e.RowIndex].Cells["MaDanhMuc"].Value?.ToString() ?? "";
+                    txtTenDanhMuc.Text = dgvDanhMuc.Rows[e.RowIndex].Cells["TenDanhMuc"].Value?.ToString() ?? "";
+                    txtMoTa.Text = dgvDanhMuc.Rows[e.RowIndex].Cells["MoTa"].Value?.ToString() ?? "";
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Lỗi click dòng danh mục: " + ex.Message);
+                }
             }
         }
 

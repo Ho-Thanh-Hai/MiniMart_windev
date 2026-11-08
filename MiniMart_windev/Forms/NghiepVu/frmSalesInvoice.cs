@@ -98,32 +98,44 @@ namespace MiniMart_windev.Forms.NghiepVu
             }
         }
 
+        private object GetRowCellValue(DataGridViewRow row, string primaryColName, string fallbackColName = null)
+        {
+            if (row != null && row.DataGridView != null)
+            {
+                if (row.DataGridView.Columns.Contains(primaryColName))
+                    return row.Cells[primaryColName].Value;
+                if (!string.IsNullOrEmpty(fallbackColName) && row.DataGridView.Columns.Contains(fallbackColName))
+                    return row.Cells[fallbackColName].Value;
+            }
+            return null;
+        }
+
         private void dgvHoaDon_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.RowIndex < dgvHoaDon.Rows.Count)
             {
-                DataGridViewRow row = dgvHoaDon.Rows[e.RowIndex];
+                try
+                {
+                    DataGridViewRow row = dgvHoaDon.Rows[e.RowIndex];
 
-                txtMaHoaDon.Text =
-                    row.Cells["MaHoaDon"].Value.ToString();
+                    txtMaHoaDon.Text = GetRowCellValue(row, "MaHoaDon", "colMaHoaDon")?.ToString() ?? "";
 
-                dtpNgayLap.Value =
-                    Convert.ToDateTime(row.Cells["NgayLap"].Value);
+                    object ngayVal = GetRowCellValue(row, "NgayLap", "colNgayLap");
+                    if (ngayVal != null && ngayVal != DBNull.Value && DateTime.TryParse(ngayVal.ToString(), out DateTime ngayLap))
+                    {
+                        dtpNgayLap.Value = ngayLap;
+                    }
 
-                txtTongTien.Text =
-                    row.Cells["TongTien"].Value.ToString();
-
-                txtGiamGia.Text =
-                    row.Cells["GiamGia"].Value.ToString();
-
-                txtThanhTien.Text =
-                    row.Cells["ThanhTien"].Value.ToString();
-
-                cboKhachHang.Text =
-                    row.Cells["TenKhachHang"].Value.ToString();
-
-                cboNguoiDung.Text =
-                    row.Cells["TenNguoiLap"].Value.ToString();
+                    txtTongTien.Text = GetRowCellValue(row, "TongTien", "colTongTien")?.ToString() ?? "0";
+                    txtGiamGia.Text = GetRowCellValue(row, "GiamGia", "colGiamGia")?.ToString() ?? "0";
+                    txtThanhTien.Text = GetRowCellValue(row, "ThanhTien", "colThanhTien")?.ToString() ?? "0";
+                    cboKhachHang.Text = GetRowCellValue(row, "TenKhachHang", "colTenKhachHang")?.ToString() ?? "";
+                    cboNguoiDung.Text = GetRowCellValue(row, "TenNguoiLap", "colTenNguoiLap")?.ToString() ?? "";
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Lỗi click dòng hóa đơn: " + ex.Message);
+                }
             }
         }
 

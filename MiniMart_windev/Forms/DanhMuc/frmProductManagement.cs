@@ -260,24 +260,31 @@ namespace MiniMart_windev.Forms.DanhMuc
 
         private void dgvSanPham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
+            if (e.RowIndex < 0 || e.RowIndex >= dgvSanPham.Rows.Count)
                 return;
 
-            DataGridViewRow row = dgvSanPham.Rows[e.RowIndex];
-            string maSP = row.Cells["MaSanPham"].Value?.ToString();
+            try
+            {
+                DataGridViewRow row = dgvSanPham.Rows[e.RowIndex];
+                string maSP = row.Cells["MaSanPham"].Value?.ToString();
 
-            SanPham sp = db.GetTable<SanPham>()
-                .FirstOrDefault(x => x.MaSanPham == maSP);
+                SanPham sp = db.GetTable<SanPham>()
+                    .FirstOrDefault(x => x.MaSanPham == maSP);
 
-            if (sp == null)
-                return;
+                if (sp == null)
+                    return;
 
-            txtMaSanPham.Text = sp.MaSanPham.ToString();
-            txtTenSanPham.Text = sp.TenSanPham;
-            cboDanhMuc.SelectedValue = sp.MaDanhMuc;
-            cboNhaCungCap.SelectedValue = sp.MaNCC;
-            txtDonGia.Text = sp.DonGia.ToString("#,##0");
-            txtSoLuongTon.Text = sp.SoLuongTon.ToString();
+                txtMaSanPham.Text = sp.MaSanPham.ToString();
+                txtTenSanPham.Text = sp.TenSanPham;
+                cboDanhMuc.SelectedValue = sp.MaDanhMuc;
+                cboNhaCungCap.SelectedValue = sp.MaNCC;
+                txtDonGia.Text = sp.DonGia.ToString("#,##0");
+                txtSoLuongTon.Text = sp.SoLuongTon.ToString();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Lỗi click dòng sản phẩm: " + ex.Message);
+            }
         }
 
         private void btnXoa_Click(object sender, EventArgs e)

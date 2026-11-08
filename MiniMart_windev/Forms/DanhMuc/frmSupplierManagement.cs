@@ -116,7 +116,7 @@ namespace MiniMart_windev.Forms.DanhMuc
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (txtMaNCC.Text == "")
+            if (string.IsNullOrWhiteSpace(txtMaNCC.Text))
             {
                 MessageBox.Show("Vui lòng chọn nhà cung cấp cần xóa!");
                 return;
@@ -130,25 +130,51 @@ namespace MiniMart_windev.Forms.DanhMuc
 
             if (result == DialogResult.Yes)
             {
-                int ma = int.Parse(txtMaNCC.Text);
-
-                var ncc = db.GetTable<NhaCungCap>()
-                            .FirstOrDefault(x => x.MaNCC == ma);
-
-                if (ncc != null)
+                try
                 {
-                    db.GetTable<NhaCungCap>().DeleteOnSubmit(ncc);
-                    db.SubmitChanges();
+                    if (!int.TryParse(txtMaNCC.Text.Trim(), out int ma))
+                    {
+                        MessageBox.Show("Mã nhà cung cấp không hợp lệ!");
+                        return;
+                    }
 
-                    MessageBox.Show("Xóa nhà cung cấp thành công!");
+                    // Kiểm tra ràng buộc khóa ngoại trước khi xóa
+                    bool coSanPham = db.GetTable<SanPham>().Any(sp => sp.MaNCC == ma);
+                    bool coPhieuNhap = db.GetTable<PhieuNhap>().Any(pn => pn.MaNCC == ma);
 
-                    LoadNhaCungCap();
+                    if (coSanPham || coPhieuNhap)
+                    {
+                        MessageBox.Show("Không thể xóa nhà cung cấp này vì đang có sản phẩm hoặc phiếu nhập liên quan!", 
+                            "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
 
-                    txtMaNCC.Clear();
-                    txtTenNCC.Clear();
-                    txtDiaChi.Clear();
-                    txtSoDienThoai.Clear();
-                    txtEmail.Clear();
+                    var ncc = db.GetTable<NhaCungCap>()
+                                .FirstOrDefault(x => x.MaNCC == ma);
+
+                    if (ncc != null)
+                    {
+                        db.GetTable<NhaCungCap>().DeleteOnSubmit(ncc);
+                        db.SubmitChanges();
+
+                        MessageBox.Show("Xóa nhà cung cấp thành công!");
+
+                        LoadNhaCungCap();
+
+                        txtMaNCC.Clear();
+                        txtTenNCC.Clear();
+                        txtDiaChi.Clear();
+                        txtSoDienThoai.Clear();
+                        txtEmail.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy nhà cung cấp!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi xóa nhà cung cấp: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -208,17 +234,21 @@ namespace MiniMart_windev.Forms.DanhMuc
 
         private void dgvNhaCungCap_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && e.RowIndex < dgvNhaCungCap.Rows.Count)
             {
-                txtMaNCC.Text = dgvNhaCungCap.Rows[e.RowIndex].Cells["MaNCC"].Value.ToString();
-
-                txtTenNCC.Text = dgvNhaCungCap.Rows[e.RowIndex].Cells["TenNCC"].Value.ToString();
-
-                txtDiaChi.Text = dgvNhaCungCap.Rows[e.RowIndex].Cells["DiaChi"].Value?.ToString();
-
-                txtSoDienThoai.Text = dgvNhaCungCap.Rows[e.RowIndex].Cells["SoDienThoai"].Value?.ToString();
-
-                txtEmail.Text = dgvNhaCungCap.Rows[e.RowIndex].Cells["Email"].Value?.ToString();
+                try
+                {
+                    DataGridViewRow row = dgvNhaCungCap.Rows[e.RowIndex];
+                    txtMaNCC.Text = row.Cells["MaNCC"].Value?.ToString() ?? "";
+                    txtTenNCC.Text = row.Cells["TenNCC"].Value?.ToString() ?? "";
+                    txtDiaChi.Text = row.Cells["DiaChi"].Value?.ToString() ?? "";
+                    txtSoDienThoai.Text = row.Cells["SoDienThoai"].Value?.ToString() ?? "";
+                    txtEmail.Text = row.Cells["Email"].Value?.ToString() ?? "";
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Lỗi click dòng nhà cung cấp: " + ex.Message);
+                }
             }
         }
 

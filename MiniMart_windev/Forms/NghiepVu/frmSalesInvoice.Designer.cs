@@ -231,7 +231,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colMaHoaDon.DataPropertyName = "MaHoaDon";
             this.colMaHoaDon.FillWeight = 80F;
             this.colMaHoaDon.HeaderText = "Mã HĐ";
-            this.colMaHoaDon.Name = "colMaHoaDon";
+            this.colMaHoaDon.Name = "MaHoaDon";
             this.colMaHoaDon.ReadOnly = true;
             // 
             // colTenNguoiLap
@@ -239,7 +239,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colTenNguoiLap.DataPropertyName = "TenNguoiLap";
             this.colTenNguoiLap.FillWeight = 110F;
             this.colTenNguoiLap.HeaderText = "Người lập";
-            this.colTenNguoiLap.Name = "colTenNguoiLap";
+            this.colTenNguoiLap.Name = "TenNguoiLap";
             this.colTenNguoiLap.ReadOnly = true;
             // 
             // colTenKhachHang
@@ -247,7 +247,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colTenKhachHang.DataPropertyName = "TenKhachHang";
             this.colTenKhachHang.FillWeight = 120F;
             this.colTenKhachHang.HeaderText = "Khách hàng";
-            this.colTenKhachHang.Name = "colTenKhachHang";
+            this.colTenKhachHang.Name = "TenKhachHang";
             this.colTenKhachHang.ReadOnly = true;
             // 
             // colNgayLap
@@ -255,7 +255,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colNgayLap.DataPropertyName = "NgayLap";
             this.colNgayLap.FillWeight = 100F;
             this.colNgayLap.HeaderText = "Ngày lập";
-            this.colNgayLap.Name = "colNgayLap";
+            this.colNgayLap.Name = "NgayLap";
             this.colNgayLap.ReadOnly = true;
             // 
             // colTongTien
@@ -263,7 +263,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colTongTien.DataPropertyName = "TongTien";
             this.colTongTien.FillWeight = 95F;
             this.colTongTien.HeaderText = "Tổng tiền";
-            this.colTongTien.Name = "colTongTien";
+            this.colTongTien.Name = "TongTien";
             this.colTongTien.ReadOnly = true;
             // 
             // colGiamGia
@@ -271,7 +271,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colGiamGia.DataPropertyName = "GiamGia";
             this.colGiamGia.FillWeight = 85F;
             this.colGiamGia.HeaderText = "Giảm giá";
-            this.colGiamGia.Name = "colGiamGia";
+            this.colGiamGia.Name = "GiamGia";
             this.colGiamGia.ReadOnly = true;
             // 
             // colThanhTien
@@ -279,7 +279,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colThanhTien.DataPropertyName = "ThanhTien";
             this.colThanhTien.FillWeight = 110F;
             this.colThanhTien.HeaderText = "Thành tiền";
-            this.colThanhTien.Name = "colThanhTien";
+            this.colThanhTien.Name = "ThanhTien";
             this.colThanhTien.ReadOnly = true;
             // 
             // lblThanhTien
