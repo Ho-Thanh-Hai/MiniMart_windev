@@ -71,7 +71,7 @@
             this.lblTieuDe.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTieuDe.AutoSize = true;
             this.lblTieuDe.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold);
-            this.lblTieuDe.Location = new System.Drawing.Point(781, 15);
+            this.lblTieuDe.Location = new System.Drawing.Point(695, 15);
             this.lblTieuDe.Name = "lblTieuDe";
             this.lblTieuDe.Size = new System.Drawing.Size(533, 57);
             this.lblTieuDe.TabIndex = 0;

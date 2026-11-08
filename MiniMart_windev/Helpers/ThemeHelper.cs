@@ -406,30 +406,64 @@ namespace MiniMart_windev.Helpers
                 ? form.Controls.Find("panelTop", true)[0]
                 : (Control)form;
 
-            // Đảm bảo nhãn tiêu đề (nếu có trong panelTop) được căn lề trái hợp lý, không bị nút đè lên
-            Label lblTitle = null;
-            foreach (Control ctrl in container.Controls)
+            if (container != form)
             {
-                if (ctrl is Label lbl && (lbl.Name.IndexOf("TieuDe", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                          lbl.Name.IndexOf("Title", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                                          lbl.Name.IndexOf("Header", StringComparison.OrdinalIgnoreCase) >= 0))
+                // Đảm bảo nhãn tiêu đề trong panelTop được căn lề trái hợp lý, không bị nút đè lên
+                Label lblTitle = null;
+                foreach (Control ctrl in container.Controls)
                 {
-                    lblTitle = lbl;
-                    break;
+                    if (ctrl is Label lbl && (lbl.Name.IndexOf("TieuDe", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                              lbl.Name.IndexOf("Title", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                              lbl.Name.IndexOf("Header", StringComparison.OrdinalIgnoreCase) >= 0))
+                    {
+                        lblTitle = lbl;
+                        break;
+                    }
+                }
+
+                if (lblTitle != null)
+                {
+                    int buttonsLeft = container.ClientSize.Width - 245;
+                    if (lblTitle.Right > buttonsLeft || lblTitle.Left > 25)
+                    {
+                        lblTitle.Left = 16;
+                        lblTitle.Top = Math.Max(10, (container.ClientSize.Height - lblTitle.Height) / 2);
+                        if (lblTitle.Font.Size > 13F)
+                        {
+                            lblTitle.Font = new Font(lblTitle.Font.FontFamily, 12.5F, FontStyle.Bold);
+                        }
+                    }
                 }
             }
-
-            if (lblTitle != null)
+            else
             {
-                int buttonsLeft = container.ClientSize.Width - 245;
-                if (lblTitle.Right > buttonsLeft || lblTitle.Left > 25)
+                // Khi không có panelTop, tìm nhãn tiêu đề chính của Form và tự động căn giữa ở đỉnh form
+                Label lblMainTitle = null;
+                foreach (Control ctrl in form.Controls)
                 {
-                    lblTitle.Left = 16;
-                    lblTitle.Top = Math.Max(10, (container.ClientSize.Height - lblTitle.Height) / 2);
-                    if (lblTitle.Font.Size > 13F)
+                    if (ctrl is Label lbl && (lbl.Name.IndexOf("TieuDe", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                              lbl.Name.IndexOf("Title", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                              lbl.Name.IndexOf("Header", StringComparison.OrdinalIgnoreCase) >= 0))
                     {
-                        lblTitle.Font = new Font(lblTitle.Font.FontFamily, 12.5F, FontStyle.Bold);
+                        lblMainTitle = lbl;
+                        break;
                     }
+                }
+
+                if (lblMainTitle != null)
+                {
+                    lblMainTitle.Top = 15;
+                    Action centerTitle = () =>
+                    {
+                        if (!lblMainTitle.IsDisposed && !form.IsDisposed && form.ClientSize.Width > 0)
+                        {
+                            lblMainTitle.Left = Math.Max(0, (form.ClientSize.Width - lblMainTitle.Width) / 2);
+                        }
+                    };
+
+                    centerTitle();
+                    form.Resize += (s, e) => centerTitle();
+                    form.Shown += (s, e) => centerTitle();
                 }
             }
 

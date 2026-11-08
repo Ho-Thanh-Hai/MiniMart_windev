@@ -61,8 +61,8 @@
             // 
             this.lblTieuDe.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTieuDe.AutoSize = true;
-            this.lblTieuDe.Font = new System.Drawing.Font("Times New Roman", 30F);
-            this.lblTieuDe.Location = new System.Drawing.Point(300, 15);
+            this.lblTieuDe.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Bold);
+            this.lblTieuDe.Location = new System.Drawing.Point(684, 15);
             this.lblTieuDe.Name = "lblTieuDe";
             this.lblTieuDe.Size = new System.Drawing.Size(556, 57);
             this.lblTieuDe.TabIndex = 0;
@@ -176,10 +176,10 @@
             // 
             // btnThem
             // 
-            this.btnThem.Font = new System.Drawing.Font("Times New Roman", 25F);
-            this.btnThem.Location = new System.Drawing.Point(1050, 120);
+            this.btnThem.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold);
+            this.btnThem.Location = new System.Drawing.Point(1040, 120);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(180, 65);
+            this.btnThem.Size = new System.Drawing.Size(200, 65);
             this.btnThem.TabIndex = 11;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = true;
@@ -187,10 +187,10 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 25F);
-            this.btnXoa.Location = new System.Drawing.Point(1050, 210);
+            this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold);
+            this.btnXoa.Location = new System.Drawing.Point(1040, 210);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(180, 65);
+            this.btnXoa.Size = new System.Drawing.Size(200, 65);
             this.btnXoa.TabIndex = 12;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = true;
@@ -198,10 +198,10 @@
             // 
             // btnSua
             // 
-            this.btnSua.Font = new System.Drawing.Font("Times New Roman", 25F);
-            this.btnSua.Location = new System.Drawing.Point(1270, 120);
+            this.btnSua.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold);
+            this.btnSua.Location = new System.Drawing.Point(1260, 120);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(180, 65);
+            this.btnSua.Size = new System.Drawing.Size(200, 65);
             this.btnSua.TabIndex = 13;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
@@ -209,10 +209,10 @@
             // 
             // btnLamMoi
             // 
-            this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 25F);
-            this.btnLamMoi.Location = new System.Drawing.Point(1270, 210);
+            this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold);
+            this.btnLamMoi.Location = new System.Drawing.Point(1260, 210);
             this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(180, 65);
+            this.btnLamMoi.Size = new System.Drawing.Size(200, 65);
             this.btnLamMoi.TabIndex = 14;
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.UseVisualStyleBackColor = true;
@@ -220,10 +220,10 @@
             // 
             // btnTimKiem
             // 
-            this.btnTimKiem.Font = new System.Drawing.Font("Times New Roman", 25F);
-            this.btnTimKiem.Location = new System.Drawing.Point(1050, 300);
+            this.btnTimKiem.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold);
+            this.btnTimKiem.Location = new System.Drawing.Point(1040, 300);
             this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(180, 65);
+            this.btnTimKiem.Size = new System.Drawing.Size(200, 65);
             this.btnTimKiem.TabIndex = 15;
             this.btnTimKiem.Text = "Tìm kiếm";
             this.btnTimKiem.UseVisualStyleBackColor = true;
@@ -341,7 +341,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(882, 603);
+            this.ClientSize = new System.Drawing.Size(1924, 761);
             this.Controls.Add(this.dgvPhieuNhap);
             this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.lblTimKiem);
