@@ -402,6 +402,39 @@ namespace MiniMart_windev.Helpers
                 topHeader.SendToBack();
             }
 
+            Control container = form.Controls.Find("panelTop", true).Length > 0
+                ? form.Controls.Find("panelTop", true)[0]
+                : (Control)form;
+
+            // Đảm bảo nhãn tiêu đề (nếu có trong panelTop) được căn lề trái hợp lý, không bị nút đè lên
+            Label lblTitle = null;
+            foreach (Control ctrl in container.Controls)
+            {
+                if (ctrl is Label lbl && (lbl.Name.IndexOf("TieuDe", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                          lbl.Name.IndexOf("Title", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                          lbl.Name.IndexOf("Header", StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    lblTitle = lbl;
+                    break;
+                }
+            }
+
+            if (lblTitle != null)
+            {
+                int buttonsLeft = container.ClientSize.Width - 245;
+                if (lblTitle.Right > buttonsLeft || lblTitle.Left > 25)
+                {
+                    lblTitle.Left = 16;
+                    lblTitle.Top = Math.Max(10, (container.ClientSize.Height - lblTitle.Height) / 2);
+                    if (lblTitle.Font.Size > 13F)
+                    {
+                        lblTitle.Font = new Font(lblTitle.Font.FontFamily, 12.5F, FontStyle.Bold);
+                    }
+                }
+            }
+
+            int btnY = container != form ? Math.Max(6, (container.ClientSize.Height - 30) / 2) : 8;
+
             // Thêm nút Theme vào Form nếu chưa có
             if (form.Controls.Find("btnToggleTheme", true).Length == 0)
             {
@@ -424,19 +457,7 @@ namespace MiniMart_windev.Helpers
                     ToggleTheme();
                 };
 
-                Control container = form.Controls.Find("panelTop", true).Length > 0
-                    ? form.Controls.Find("panelTop", true)[0]
-                    : (Control)form;
-
-                if (container != form)
-                {
-                    btnTheme.Location = new Point(container.ClientSize.Width - 110, 8);
-                }
-                else
-                {
-                    btnTheme.Location = new Point(form.ClientSize.Width - 110, 8);
-                }
-
+                btnTheme.Location = new Point(container.ClientSize.Width - 110, btnY);
                 container.Controls.Add(btnTheme);
                 btnTheme.BringToFront();
             }
@@ -463,19 +484,7 @@ namespace MiniMart_windev.Helpers
                     form.Close();
                 };
 
-                Control container = form.Controls.Find("panelTop", true).Length > 0
-                    ? form.Controls.Find("panelTop", true)[0]
-                    : (Control)form;
-
-                if (container != form)
-                {
-                    btnBack.Location = new Point(container.ClientSize.Width - 238, 8);
-                }
-                else
-                {
-                    btnBack.Location = new Point(form.ClientSize.Width - 238, 8);
-                }
-
+                btnBack.Location = new Point(container.ClientSize.Width - 238, btnY);
                 container.Controls.Add(btnBack);
                 btnBack.BringToFront();
             }

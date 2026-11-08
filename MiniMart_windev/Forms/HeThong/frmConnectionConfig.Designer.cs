@@ -45,17 +45,17 @@ namespace MiniMart_windev.Forms.HeThong
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(530, 60);
+            this.panelTop.Size = new System.Drawing.Size(600, 60);
             this.panelTop.TabIndex = 0;
             // 
             // lblTieuDe
             // 
             this.lblTieuDe.AutoSize = true;
-            this.lblTieuDe.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTieuDe.Font = new System.Drawing.Font("Segoe UI", 12.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTieuDe.ForeColor = System.Drawing.Color.White;
-            this.lblTieuDe.Location = new System.Drawing.Point(100, 15);
+            this.lblTieuDe.Location = new System.Drawing.Point(16, 17);
             this.lblTieuDe.Name = "lblTieuDe";
-            this.lblTieuDe.Size = new System.Drawing.Size(325, 30);
+            this.lblTieuDe.Size = new System.Drawing.Size(260, 23);
             this.lblTieuDe.TabIndex = 0;
             this.lblTieuDe.Text = "CẤU HÌNH KẾT NỐI DATABASE";
             // 
@@ -74,7 +74,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.txtServer.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtServer.Location = new System.Drawing.Point(135, 82);
             this.txtServer.Name = "txtServer";
-            this.txtServer.Size = new System.Drawing.Size(350, 25);
+            this.txtServer.Size = new System.Drawing.Size(430, 25);
             this.txtServer.TabIndex = 2;
             this.txtServer.Text = ".\\MSSQLSERVER02";
             // 
@@ -89,7 +89,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.grpXacThuc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpXacThuc.Location = new System.Drawing.Point(30, 125);
             this.grpXacThuc.Name = "grpXacThuc";
-            this.grpXacThuc.Size = new System.Drawing.Size(465, 140);
+            this.grpXacThuc.Size = new System.Drawing.Size(535, 140);
             this.grpXacThuc.TabIndex = 3;
             this.grpXacThuc.TabStop = false;
             this.grpXacThuc.Text = "Xác thực (Authentication)";
@@ -100,7 +100,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.txtMatKhau.Location = new System.Drawing.Point(145, 98);
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.PasswordChar = '●';
-            this.txtMatKhau.Size = new System.Drawing.Size(295, 25);
+            this.txtMatKhau.Size = new System.Drawing.Size(360, 25);
             this.txtMatKhau.TabIndex = 5;
             // 
             // label3
@@ -117,7 +117,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.txtTaiKhoan.Enabled = false;
             this.txtTaiKhoan.Location = new System.Drawing.Point(145, 63);
             this.txtTaiKhoan.Name = "txtTaiKhoan";
-            this.txtTaiKhoan.Size = new System.Drawing.Size(295, 25);
+            this.txtTaiKhoan.Size = new System.Drawing.Size(360, 25);
             this.txtTaiKhoan.TabIndex = 3;
             // 
             // label2
@@ -169,7 +169,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.cboDatabase.FormattingEnabled = true;
             this.cboDatabase.Location = new System.Drawing.Point(135, 282);
             this.cboDatabase.Name = "cboDatabase";
-            this.cboDatabase.Size = new System.Drawing.Size(265, 25);
+            this.cboDatabase.Size = new System.Drawing.Size(325, 25);
             this.cboDatabase.TabIndex = 5;
             this.cboDatabase.Text = "QuanLySieuThiMini";
             // 
@@ -179,9 +179,9 @@ namespace MiniMart_windev.Forms.HeThong
             this.btnLayDanhSachDB.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLayDanhSachDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLayDanhSachDB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLayDanhSachDB.Location = new System.Drawing.Point(410, 280);
+            this.btnLayDanhSachDB.Location = new System.Drawing.Point(470, 280);
             this.btnLayDanhSachDB.Name = "btnLayDanhSachDB";
-            this.btnLayDanhSachDB.Size = new System.Drawing.Size(85, 29);
+            this.btnLayDanhSachDB.Size = new System.Drawing.Size(95, 29);
             this.btnLayDanhSachDB.TabIndex = 6;
             this.btnLayDanhSachDB.Text = "🔄 Tải DB";
             this.btnLayDanhSachDB.UseVisualStyleBackColor = false;
@@ -194,7 +194,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.btnKiemTraKetNoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnKiemTraKetNoi.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnKiemTraKetNoi.ForeColor = System.Drawing.Color.White;
-            this.btnKiemTraKetNoi.Location = new System.Drawing.Point(30, 340);
+            this.btnKiemTraKetNoi.Location = new System.Drawing.Point(45, 340);
             this.btnKiemTraKetNoi.Name = "btnKiemTraKetNoi";
             this.btnKiemTraKetNoi.Size = new System.Drawing.Size(155, 38);
             this.btnKiemTraKetNoi.TabIndex = 7;
@@ -211,7 +211,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.btnLuuCauHinh.ForeColor = System.Drawing.Color.White;
             this.btnLuuCauHinh.Location = new System.Drawing.Point(220, 340);
             this.btnLuuCauHinh.Name = "btnLuuCauHinh";
-            this.btnLuuCauHinh.Size = new System.Drawing.Size(160, 38);
+            this.btnLuuCauHinh.Size = new System.Drawing.Size(165, 38);
             this.btnLuuCauHinh.TabIndex = 8;
             this.btnLuuCauHinh.Text = "💾 Lưu cấu hình";
             this.btnLuuCauHinh.UseVisualStyleBackColor = false;
@@ -223,9 +223,9 @@ namespace MiniMart_windev.Forms.HeThong
             this.btnThoat.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnThoat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThoat.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(400, 340);
+            this.btnThoat.Location = new System.Drawing.Point(405, 340);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(95, 38);
+            this.btnThoat.Size = new System.Drawing.Size(145, 38);
             this.btnThoat.TabIndex = 9;
             this.btnThoat.Text = "Đóng";
             this.btnThoat.UseVisualStyleBackColor = false;
@@ -236,7 +236,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(530, 405);
+            this.ClientSize = new System.Drawing.Size(600, 405);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.btnLuuCauHinh);
             this.Controls.Add(this.btnKiemTraKetNoi);
