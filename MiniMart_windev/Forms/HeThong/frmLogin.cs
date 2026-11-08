@@ -85,19 +85,6 @@ namespace MiniMart_windev.Forms.HeThong
                     CurrentUserSession.HoTen = account.HoTen;
                     CurrentUserSession.MaVaiTro = account.MaVaiTro;
                     CurrentUserSession.TenVaiTro = account.TenVaiTro;
-
-                    // 6. Đăng nhập thành công -> Mở form Main
-                    MessageBox.Show($"Đăng nhập thành công!\nXin chào: {account.HoTen} ({account.TenVaiTro})",
-                        "Chào mừng", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    this.Hide();
-                    frmMain mainForm = new frmMain();
-                    mainForm.ShowDialog();
-
-                    // Khi người dùng bấm Đăng xuất ở Main tắt đi thì mở lại Login
-                    this.Show();
-                    txtMatKhau.Clear();
-                    txtTenDangNhap.Focus();
                 }
             }
             catch (Exception ex)
@@ -124,7 +111,21 @@ namespace MiniMart_windev.Forms.HeThong
                     frmConnectionConfig configForm = new frmConnectionConfig();
                     configForm.ShowDialog();
                 }
+                return;
             }
+
+            // 6. Đăng nhập thành công -> Mở form Main (nằm ngoài khối bắt lỗi CSDL Login để tránh hiểu nhầm lỗi ứng dụng là lỗi kết nối CSDL)
+            MessageBox.Show($"Đăng nhập thành công!\nXin chào: {CurrentUserSession.HoTen} ({CurrentUserSession.TenVaiTro})",
+                "Chào mừng", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            this.Hide();
+            frmMain mainForm = new frmMain();
+            mainForm.ShowDialog();
+
+            // Khi người dùng bấm Đăng xuất ở Main tắt đi thì mở lại Login
+            this.Show();
+            txtMatKhau.Clear();
+            txtTenDangNhap.Focus();
         }
 
         private void btnThoat_Click(object sender, EventArgs e)

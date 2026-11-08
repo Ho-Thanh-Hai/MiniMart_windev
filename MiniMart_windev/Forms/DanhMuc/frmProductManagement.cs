@@ -27,6 +27,44 @@ namespace MiniMart_windev.Forms.DanhMuc
             LoadNhaCungCap();
             LoadSanPham();
             LoadLocDanhMuc();
+            txtMaSanPham.Text = TaoMaSanPhamMoi();
+        }
+
+        private string TaoMaSanPhamMoi()
+        {
+            try
+            {
+                var listMa = db.GetTable<SanPham>()
+                               .Select(s => s.MaSanPham)
+                               .ToList();
+
+                int maxSo = 0;
+                foreach (var ma in listMa)
+                {
+                    if (!string.IsNullOrEmpty(ma) && ma.StartsWith("SP", StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (int.TryParse(ma.Substring(2), out int so))
+                        {
+                            if (so > maxSo) maxSo = so;
+                        }
+                    }
+                }
+
+                int nextSo = maxSo + 1;
+                string nextMa = "SP" + nextSo.ToString("D3");
+
+                while (listMa.Any(m => string.Equals(m, nextMa, StringComparison.OrdinalIgnoreCase)))
+                {
+                    nextSo++;
+                    nextMa = "SP" + nextSo.ToString("D3");
+                }
+
+                return nextMa;
+            }
+            catch
+            {
+                return "SP" + (db.GetTable<SanPham>().Count() + 1).ToString("D3");
+            }
         }
 
         private void frmProductManagement_Load(object sender, EventArgs e)
@@ -78,47 +116,72 @@ namespace MiniMart_windev.Forms.DanhMuc
                 txtDonGia.Text.Trim() == "" ||
                 txtSoLuongTon.Text.Trim() == "")
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cboDanhMuc.SelectedValue == null || cboNhaCungCap.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn danh mục và nhà cung cấp!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             decimal donGia;
             int soLuong;
 
-            if (!decimal.TryParse(txtDonGia.Text, out donGia) ||
-                !int.TryParse(txtSoLuongTon.Text, out soLuong))
+            string cleanDonGia = txtDonGia.Text.Trim().Replace(",", "");
+            if (!decimal.TryParse(cleanDonGia, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out donGia) &&
+                !decimal.TryParse(txtDonGia.Text.Trim(), out donGia))
             {
-                MessageBox.Show("Đơn giá hoặc số lượng không hợp lệ!");
+                MessageBox.Show("Đơn giá không hợp lệ!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!int.TryParse(txtSoLuongTon.Text.Trim(), out soLuong))
+            {
+                MessageBox.Show("Số lượng không hợp lệ!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (donGia < 0 || soLuong < 0)
             {
-                MessageBox.Show("Đơn giá và số lượng không được âm!");
+                MessageBox.Show("Đơn giá và số lượng không được âm!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            SanPham sp = new SanPham();
-            sp.MaSanPham = "SP" + (db.GetTable<SanPham>().Count() + 1).ToString("D3");
-            sp.TenSanPham = txtTenSanPham.Text.Trim();
-            sp.MaDanhMuc = Convert.ToInt32(cboDanhMuc.SelectedValue);
-            sp.MaNCC = Convert.ToInt32(cboNhaCungCap.SelectedValue);
-            sp.DonGia = donGia;
-            sp.SoLuongTon = soLuong;
+            try
+            {
+                SanPham sp = new SanPham();
+                sp.MaSanPham = TaoMaSanPhamMoi();
+                sp.TenSanPham = txtTenSanPham.Text.Trim();
+                sp.MaDanhMuc = Convert.ToInt32(cboDanhMuc.SelectedValue);
+                sp.MaNCC = Convert.ToInt32(cboNhaCungCap.SelectedValue);
+                sp.DonGia = donGia;
+                sp.SoLuongTon = soLuong;
 
-            db.GetTable<SanPham>().InsertOnSubmit(sp);
-            db.SubmitChanges();
+                db.GetTable<SanPham>().InsertOnSubmit(sp);
+                db.SubmitChanges();
 
-            MessageBox.Show("Thêm sản phẩm thành công!");
-            LoadSanPham();
-            LoadLocDanhMuc();
+                MessageBox.Show("Thêm sản phẩm thành công! Mã sản phẩm: " + sp.MaSanPham, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadSanPham();
+                LoadLocDanhMuc();
+
+                txtMaSanPham.Text = TaoMaSanPhamMoi();
+                txtTenSanPham.Clear();
+                txtDonGia.Clear();
+                txtSoLuongTon.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi thêm sản phẩm: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (txtMaSanPham.Text == "")
             {
-                MessageBox.Show("Vui lòng chọn sản phẩm cần sửa!");
+                MessageBox.Show("Vui lòng chọn sản phẩm cần sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -126,48 +189,68 @@ namespace MiniMart_windev.Forms.DanhMuc
                 txtDonGia.Text.Trim() == "" ||
                 txtSoLuongTon.Text.Trim() == "")
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cboDanhMuc.SelectedValue == null || cboNhaCungCap.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn danh mục và nhà cung cấp!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             decimal donGia;
             int soLuong;
 
-            if (!decimal.TryParse(txtDonGia.Text, out donGia) ||
-                !int.TryParse(txtSoLuongTon.Text, out soLuong))
+            string cleanDonGia = txtDonGia.Text.Trim().Replace(",", "");
+            if (!decimal.TryParse(cleanDonGia, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out donGia) &&
+                !decimal.TryParse(txtDonGia.Text.Trim(), out donGia))
             {
-                MessageBox.Show("Đơn giá hoặc số lượng không hợp lệ!");
+                MessageBox.Show("Đơn giá không hợp lệ!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!int.TryParse(txtSoLuongTon.Text.Trim(), out soLuong))
+            {
+                MessageBox.Show("Số lượng không hợp lệ!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (donGia < 0 || soLuong < 0)
             {
-                MessageBox.Show("Đơn giá và số lượng không được âm!");
+                MessageBox.Show("Đơn giá và số lượng không được âm!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string maSP = txtMaSanPham.Text.Trim();
-
-            SanPham sp = db.GetTable<SanPham>()
-                .FirstOrDefault(x => x.MaSanPham == maSP);
-
-            if (sp == null)
+            try
             {
-                MessageBox.Show("Không tìm thấy sản phẩm!");
-                return;
+                string maSP = txtMaSanPham.Text.Trim();
+
+                SanPham sp = db.GetTable<SanPham>()
+                    .FirstOrDefault(x => x.MaSanPham == maSP);
+
+                if (sp == null)
+                {
+                    MessageBox.Show("Không tìm thấy sản phẩm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                sp.TenSanPham = txtTenSanPham.Text.Trim();
+                sp.MaDanhMuc = Convert.ToInt32(cboDanhMuc.SelectedValue);
+                sp.MaNCC = Convert.ToInt32(cboNhaCungCap.SelectedValue);
+                sp.DonGia = donGia;
+                sp.SoLuongTon = soLuong;
+
+                db.SubmitChanges();
+
+                MessageBox.Show("Cập nhật sản phẩm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadSanPham();
+                LoadLocDanhMuc();
             }
-
-            sp.TenSanPham = txtTenSanPham.Text.Trim();
-            sp.MaDanhMuc = Convert.ToInt32(cboDanhMuc.SelectedValue);
-            sp.MaNCC = Convert.ToInt32(cboNhaCungCap.SelectedValue);
-            sp.DonGia = donGia;
-            sp.SoLuongTon = soLuong;
-
-            db.SubmitChanges();
-
-            MessageBox.Show("Cập nhật sản phẩm thành công!");
-            LoadSanPham();
-            LoadLocDanhMuc();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi cập nhật sản phẩm: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dgvSanPham_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -201,7 +284,7 @@ namespace MiniMart_windev.Forms.DanhMuc
         {
             if (txtMaSanPham.Text == "")
             {
-                MessageBox.Show("Vui lòng chọn sản phẩm cần xóa!");
+                MessageBox.Show("Vui lòng chọn sản phẩm cần xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -213,31 +296,39 @@ namespace MiniMart_windev.Forms.DanhMuc
 
             if (result == DialogResult.Yes)
             {
-                string maSP = txtMaSanPham.Text.Trim();
-
-                SanPham sp = db.GetTable<SanPham>()
-                    .FirstOrDefault(x => x.MaSanPham == maSP);
-
-                if (sp != null)
+                try
                 {
-                    db.GetTable<SanPham>().DeleteOnSubmit(sp);
-                    db.SubmitChanges();
+                    string maSP = txtMaSanPham.Text.Trim();
 
-                    MessageBox.Show("Xóa sản phẩm thành công!");
-                    LoadSanPham();
-            LoadLocDanhMuc();
+                    SanPham sp = db.GetTable<SanPham>()
+                        .FirstOrDefault(x => x.MaSanPham == maSP);
 
-                    txtMaSanPham.Clear();
-                    txtTenSanPham.Clear();
-                    txtDonGia.Clear();
-                    txtSoLuongTon.Clear();
+                    if (sp != null)
+                    {
+                        db.GetTable<SanPham>().DeleteOnSubmit(sp);
+                        db.SubmitChanges();
+
+                        MessageBox.Show("Xóa sản phẩm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadSanPham();
+                        LoadLocDanhMuc();
+
+                        txtMaSanPham.Text = TaoMaSanPhamMoi();
+                        txtTenSanPham.Clear();
+                        txtDonGia.Clear();
+                        txtSoLuongTon.Clear();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Không thể xóa sản phẩm này do đã phát sinh hóa đơn hoặc phiếu nhập liên quan!\n\nChi tiết: " + ex.Message,
+                        "Cảnh báo ràng buộc dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            txtMaSanPham.Clear();
+            txtMaSanPham.Text = TaoMaSanPhamMoi();
             txtTenSanPham.Clear();
             txtDonGia.Clear();
             txtSoLuongTon.Clear();
