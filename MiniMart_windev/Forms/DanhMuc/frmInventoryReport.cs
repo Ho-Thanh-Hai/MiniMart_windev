@@ -1,6 +1,5 @@
-﻿using MiniMart_windev.Helpers;
+using MiniMart_windev.Helpers;
 using MiniMart_windev.Models;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,15 +15,17 @@ namespace MiniMart_windev.Forms.DanhMuc
 {
     public partial class frmInventoryReport : Form
     {
-        private QuanLyBanHangKhoDataContext db = new QuanLyBanHangKhoDataContext();
-
+        private QuanLyBanHangKhoDataContext db;
         private int? maDanhMuc = null;
-
         private string tenDanhMuc = "";
+
         public frmInventoryReport()
         {
             InitializeComponent();
-            ThemeHelper.SetupFormThemeAndNavigation(this);
+            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime && !DesignMode)
+            {
+                ThemeHelper.SetupFormThemeAndNavigation(this);
+            }
         }
 
         public frmInventoryReport(int maDanhMuc, string tenDanhMuc) : this()
@@ -35,37 +36,58 @@ namespace MiniMart_windev.Forms.DanhMuc
 
         private void frmInventoryReport_Load(object sender, EventArgs e)
         {
-            var query = db.SanPhams.AsQueryable();
-
-            if (maDanhMuc.HasValue)
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
             {
-                int maDM = maDanhMuc.Value;
-                query = query.Where(sp => sp.MaDanhMuc == maDM);
+                return;
             }
 
-            var ds = query
-                .Select(sp => new
+            try
+            {
+                if (db == null)
                 {
-                    sp.MaSanPham,
-                    sp.TenSanPham,
-                    DanhMuc = sp.DanhMuc.TenDanhMuc,
-                    NhaCungCap = sp.NhaCungCap.TenNCC,
-                    sp.DonGia,
-                    sp.SoLuongTon
-                })
-                .ToList();
-            reportViewer1.LocalReport.SetParameters(
-                new ReportParameter("TenDanhMuc", tenDanhMuc)
-            );
-            
+                    db = new QuanLyBanHangKhoDataContext();
+                }
 
-            reportViewer1.LocalReport.DataSources.Clear();
+                if (string.IsNullOrEmpty(reportViewer1.LocalReport.ReportEmbeddedResource))
+                {
+                    reportViewer1.LocalReport.ReportEmbeddedResource = "QuanLyBanHangKho.rptInventory.rdlc";
+                }
 
-            reportViewer1.LocalReport.DataSources.Add(
-                new ReportDataSource("dsSanPham", ds)
-            );
+                var query = db.SanPhams.AsQueryable();
 
-            reportViewer1.RefreshReport();
+                if (maDanhMuc.HasValue)
+                {
+                    int maDM = maDanhMuc.Value;
+                    query = query.Where(sp => sp.MaDanhMuc == maDM);
+                }
+
+                var ds = query
+                    .Select(sp => new
+                    {
+                        sp.MaSanPham,
+                        sp.TenSanPham,
+                        DanhMuc = sp.DanhMuc.TenDanhMuc,
+                        NhaCungCap = sp.NhaCungCap.TenNCC,
+                        sp.DonGia,
+                        sp.SoLuongTon
+                    })
+                    .ToList();
+
+                reportViewer1.LocalReport.SetParameters(
+                    new ReportParameter("TenDanhMuc", tenDanhMuc ?? "")
+                );
+
+                reportViewer1.LocalReport.DataSources.Clear();
+                reportViewer1.LocalReport.DataSources.Add(
+                    new ReportDataSource("dsSanPham", ds)
+                );
+
+                reportViewer1.RefreshReport();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi hiển thị báo cáo tồn kho: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

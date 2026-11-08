@@ -16,12 +16,15 @@ namespace MiniMart_windev.Forms.NghiepVu
     public partial class frmInvoicePrint : Form
     {
         private int maHoaDon;
-        private QuanLyBanHangKhoDataContext db = new QuanLyBanHangKhoDataContext();
+        private QuanLyBanHangKhoDataContext db;
 
         public frmInvoicePrint()
         {
             InitializeComponent();
-            ThemeHelper.SetupFormThemeAndNavigation(this);
+            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime && !DesignMode)
+            {
+                ThemeHelper.SetupFormThemeAndNavigation(this);
+            }
         }
 
         public frmInvoicePrint(int maHD) : this()
@@ -31,8 +34,23 @@ namespace MiniMart_windev.Forms.NghiepVu
 
         private void frmInvoicePrint_Load(object sender, EventArgs e)
         {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
+            {
+                return;
+            }
+
             try
             {
+                if (db == null)
+                {
+                    db = new QuanLyBanHangKhoDataContext();
+                }
+
+                if (string.IsNullOrEmpty(reportViewer1.LocalReport.ReportEmbeddedResource))
+                {
+                    reportViewer1.LocalReport.ReportEmbeddedResource = "QuanLyBanHangKho.ReportHoaDon.rdlc";
+                }
+
                 // Lấy thông tin Hóa đơn
                 var hd = db.GetTable<HoaDon>().FirstOrDefault(h => h.MaHoaDon == maHoaDon);
                 string maHDStr = "HD" + maHoaDon.ToString("D5");

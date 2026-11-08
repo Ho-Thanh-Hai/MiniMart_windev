@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,7 +18,10 @@ namespace MiniMart_windev.Forms.BaoCao
         public frmRevenuePrint()
         {
             InitializeComponent();
-            ThemeHelper.SetupFormThemeAndNavigation(this);
+            if (LicenseManager.UsageMode != LicenseUsageMode.Designtime && !DesignMode)
+            {
+                ThemeHelper.SetupFormThemeAndNavigation(this);
+            }
             _tuNgay = DateTime.Today;
             _denNgay = DateTime.Today;
         }
@@ -30,6 +34,11 @@ namespace MiniMart_windev.Forms.BaoCao
 
         private void frmRevenuePrint_Load(object sender, EventArgs e)
         {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
+            {
+                return;
+            }
+
             try
             {
                 using (var db = new MiniMartDBDataContext())
@@ -73,22 +82,17 @@ namespace MiniMart_windev.Forms.BaoCao
                         : "Quản trị viên";
 
                     reportViewer1.LocalReport.ReportEmbeddedResource = "MiniMart_windev.Forms.BaoCao.rptDoanhThu.rdlc";
-
-                    ReportParameter[] parameters = new ReportParameter[]
+                    reportViewer1.LocalReport.SetParameters(new ReportParameter[]
                     {
                         new ReportParameter("TuNgay", _tuNgay.ToString("dd/MM/yyyy")),
                         new ReportParameter("DenNgay", _denNgay.ToString("dd/MM/yyyy")),
                         new ReportParameter("NguoiLap", nguoiLap),
-                        new ReportParameter("NgayIn", DateTime.Now.ToString("dd/MM/yyyy HH:mm"))
-                    };
+                        new ReportParameter("TongDoanhThu", list.Sum(x => x.ThanhTien).ToString("N0") + " VNĐ"),
+                        new ReportParameter("TongDonHang", list.Count.ToString())
+                    });
 
-                    reportViewer1.LocalReport.SetParameters(parameters);
-
-                    // Thiết lập DataSource
                     reportViewer1.LocalReport.DataSources.Clear();
-                    ReportDataSource rds = new ReportDataSource("dsDoanhThu", reportData);
-                    reportViewer1.LocalReport.DataSources.Add(rds);
-
+                    reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsDoanhThu", reportData));
                     reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                     reportViewer1.ZoomMode = ZoomMode.Percent;
                     reportViewer1.ZoomPercent = 100;
@@ -97,7 +101,7 @@ namespace MiniMart_windev.Forms.BaoCao
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi hiển thị báo cáo: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi hiển thị báo cáo: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
