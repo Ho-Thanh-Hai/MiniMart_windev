@@ -212,7 +212,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colMaKhachHang.DataPropertyName = "MaKhachHang";
             this.colMaKhachHang.FillWeight = 60F;
             this.colMaKhachHang.HeaderText = "Mã KH";
-            this.colMaKhachHang.Name = "colMaKhachHang";
+            this.colMaKhachHang.Name = "MaKhachHang";
             this.colMaKhachHang.ReadOnly = true;
             // 
             // colHoTen
@@ -220,7 +220,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colHoTen.DataPropertyName = "HoTen";
             this.colHoTen.FillWeight = 130F;
             this.colHoTen.HeaderText = "Họ tên";
-            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.Name = "HoTen";
             this.colHoTen.ReadOnly = true;
             // 
             // colSoDienThoai
@@ -228,7 +228,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colSoDienThoai.DataPropertyName = "SoDienThoai";
             this.colSoDienThoai.FillWeight = 90F;
             this.colSoDienThoai.HeaderText = "Số điện thoại";
-            this.colSoDienThoai.Name = "colSoDienThoai";
+            this.colSoDienThoai.Name = "SoDienThoai";
             this.colSoDienThoai.ReadOnly = true;
             // 
             // colEmail
@@ -236,7 +236,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colEmail.DataPropertyName = "Email";
             this.colEmail.FillWeight = 110F;
             this.colEmail.HeaderText = "Email";
-            this.colEmail.Name = "colEmail";
+            this.colEmail.Name = "Email";
             this.colEmail.ReadOnly = true;
             // 
             // colDiaChi
@@ -244,7 +244,7 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.colDiaChi.DataPropertyName = "DiaChi";
             this.colDiaChi.FillWeight = 130F;
             this.colDiaChi.HeaderText = "Địa chỉ";
-            this.colDiaChi.Name = "colDiaChi";
+            this.colDiaChi.Name = "DiaChi";
             this.colDiaChi.ReadOnly = true;
             // 
             // btnThem

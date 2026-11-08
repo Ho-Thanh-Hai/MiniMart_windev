@@ -40,6 +40,16 @@ namespace MiniMart_windev.Forms.NghiepVu
                 dgvKhachHang.DataSource = danhSach;
             }
         }
+        private object GetRowCellValue(DataGridViewRow row, string primaryColName, string fallbackColName)
+        {
+            if (row == null || row.DataGridView == null) return null;
+            if (row.DataGridView.Columns.Contains(primaryColName))
+                return row.Cells[primaryColName].Value;
+            if (row.DataGridView.Columns.Contains(fallbackColName))
+                return row.Cells[fallbackColName].Value;
+            return null;
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -53,8 +63,13 @@ namespace MiniMart_windev.Forms.NghiepVu
                 return;
             }
 
-            int maKH = Convert.ToInt32(
-                dgvKhachHang.CurrentRow.Cells["MaKhachHang"].Value);
+            object maVal = GetRowCellValue(dgvKhachHang.CurrentRow, "MaKhachHang", "colMaKhachHang");
+            if (maVal == null)
+            {
+                MessageBox.Show("Vui lòng chọn khách hàng cần sửa!");
+                return;
+            }
+            int maKH = Convert.ToInt32(maVal);
 
             if (txtHoTen.Text.Trim() == "")
             {
@@ -123,10 +138,10 @@ namespace MiniMart_windev.Forms.NghiepVu
             {
                 DataGridViewRow row = dgvKhachHang.Rows[e.RowIndex];
 
-                txtHoTen.Text = row.Cells["HoTen"].Value?.ToString();
-                txtSoDienThoai.Text = row.Cells["SoDienThoai"].Value?.ToString();
-                txtEmail.Text = row.Cells["Email"].Value?.ToString();
-                txtDiaChi.Text = row.Cells["DiaChi"].Value?.ToString();
+                txtHoTen.Text = GetRowCellValue(row, "HoTen", "colHoTen")?.ToString() ?? "";
+                txtSoDienThoai.Text = GetRowCellValue(row, "SoDienThoai", "colSoDienThoai")?.ToString() ?? "";
+                txtEmail.Text = GetRowCellValue(row, "Email", "colEmail")?.ToString() ?? "";
+                txtDiaChi.Text = GetRowCellValue(row, "DiaChi", "colDiaChi")?.ToString() ?? "";
             }
         }
 
@@ -138,8 +153,13 @@ namespace MiniMart_windev.Forms.NghiepVu
                 return;
             }
 
-            int maKH = Convert.ToInt32(
-                dgvKhachHang.CurrentRow.Cells["MaKhachHang"].Value);
+            object maVal = GetRowCellValue(dgvKhachHang.CurrentRow, "MaKhachHang", "colMaKhachHang");
+            if (maVal == null)
+            {
+                MessageBox.Show("Vui lòng chọn khách hàng cần xóa!");
+                return;
+            }
+            int maKH = Convert.ToInt32(maVal);
 
             DialogResult result = MessageBox.Show(
                 "Bạn có chắc chắn muốn xóa khách hàng này không?",
