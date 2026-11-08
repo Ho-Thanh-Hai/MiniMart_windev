@@ -34,6 +34,9 @@
             this.colTenSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalRevenue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblChartType = new System.Windows.Forms.Label();
+            this.cboChartType = new System.Windows.Forms.ComboBox();
+            this.btnXuatExcel = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
@@ -68,6 +71,9 @@
             // panelFilter
             // 
             this.panelFilter.BackColor = System.Drawing.Color.White;
+            this.panelFilter.Controls.Add(this.btnXuatExcel);
+            this.panelFilter.Controls.Add(this.cboChartType);
+            this.panelFilter.Controls.Add(this.lblChartType);
             this.panelFilter.Controls.Add(this.cboTopCount);
             this.panelFilter.Controls.Add(this.label1);
             this.panelFilter.Controls.Add(this.btnThongKe);
@@ -118,6 +124,48 @@
             this.btnThongKe.Text = "🔄 Làm mới";
             this.btnThongKe.UseVisualStyleBackColor = false;
             this.btnThongKe.Click += new System.EventHandler(this.btnThongKe_Click);
+            // 
+            // lblChartType
+            // 
+            this.lblChartType.AutoSize = true;
+            this.lblChartType.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.lblChartType.Location = new System.Drawing.Point(460, 18);
+            this.lblChartType.Name = "lblChartType";
+            this.lblChartType.Size = new System.Drawing.Size(86, 17);
+            this.lblChartType.TabIndex = 3;
+            this.lblChartType.Text = "Loại biểu đồ:";
+            // 
+            // cboChartType
+            // 
+            this.cboChartType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboChartType.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.cboChartType.FormattingEnabled = true;
+            this.cboChartType.Items.AddRange(new object[] {
+            "Biểu đồ Cột: Top bán chạy",
+            "Biểu đồ Đường: Doanh thu 12 tháng",
+            "Biểu đồ Tròn: Doanh thu theo Danh mục"});
+            this.cboChartType.Location = new System.Drawing.Point(555, 15);
+            this.cboChartType.Name = "cboChartType";
+            this.cboChartType.Size = new System.Drawing.Size(230, 25);
+            this.cboChartType.TabIndex = 4;
+            this.cboChartType.SelectedIndexChanged += new System.EventHandler(this.cboChartType_SelectedIndexChanged);
+            // 
+            // btnXuatExcel
+            // 
+            this.btnXuatExcel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.btnXuatExcel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnXuatExcel.FlatAppearance.BorderSize = 0;
+            this.btnXuatExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXuatExcel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnXuatExcel.ForeColor = System.Drawing.Color.White;
+            this.btnXuatExcel.Location = new System.Drawing.Point(795, 11);
+            this.btnXuatExcel.Name = "btnXuatExcel";
+            this.btnXuatExcel.Size = new System.Drawing.Size(125, 32);
+            this.btnXuatExcel.TabIndex = 5;
+            this.btnXuatExcel.Text = "📊 Xuất Excel";
+            this.btnXuatExcel.UseVisualStyleBackColor = false;
+            this.btnXuatExcel.Click += new System.EventHandler(this.btnXuatExcel_Click);
+
             // 
             // splitContainerMain
             // 
@@ -251,6 +299,9 @@
         private System.Windows.Forms.ComboBox cboTopCount;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnThongKe;
+        private System.Windows.Forms.Label lblChartType;
+        private System.Windows.Forms.ComboBox cboChartType;
+        private System.Windows.Forms.Button btnXuatExcel;
         private System.Windows.Forms.SplitContainer splitContainerMain;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartTopProducts;
         private System.Windows.Forms.DataGridView dgvTopProducts;

@@ -450,5 +450,31 @@ namespace MiniMart_windev.Forms.NghiepVu
 
             frm.ShowDialog();
         }
+
+        private void btnVietQR_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtMaHoaDon.Text))
+            {
+                MessageBox.Show("Vui lòng chọn một hóa đơn trong danh sách để thanh toán VietQR!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int maHD = Convert.ToInt32(txtMaHoaDon.Text);
+            decimal thanhTien = 0;
+            if (!string.IsNullOrWhiteSpace(txtThanhTien.Text))
+            {
+                decimal.TryParse(txtThanhTien.Text.Replace("đ", "").Replace(",", "").Trim(), out thanhTien);
+            }
+
+            string tenKhach = cboKhachHang.Text;
+            frmVietQRDialog qrDialog = new frmVietQRDialog(maHD, thanhTien, tenKhach);
+            qrDialog.ShowDialog();
+        }
+
+        private void btnXuatExcel_Click(object sender, EventArgs e)
+        {
+            ExcelExportHelper.ExportDataGridViewToExcel(dgvHoaDon, $"DanhSachHoaDon_{DateTime.Now:yyyyMMdd_HHmmss}", "DANH SÁCH HÓA ĐƠN BÁN HÀNG SIÊU THỊ MINIMART");
+        }
     }
 }

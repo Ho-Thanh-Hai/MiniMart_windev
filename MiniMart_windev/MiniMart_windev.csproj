@@ -195,6 +195,13 @@
     <Compile Include="Helpers\ThemeHelper.cs" />
     <Compile Include="Helpers\SecurityHelper.cs" />
     <Compile Include="Helpers\DatabaseHelper.cs" />
+    <Compile Include="Forms\NghiepVu\frmVietQRDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NghiepVu\frmVietQRDialog.Designer.cs">
+      <DependentUpon>frmVietQRDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ExcelExportHelper.cs" />
     <Compile Include="Models\MiniMartDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

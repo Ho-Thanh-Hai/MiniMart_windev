@@ -60,6 +60,8 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.btnChiTiet = new System.Windows.Forms.Button();
+            this.btnVietQR = new System.Windows.Forms.Button();
+            this.btnXuatExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoaDon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -396,13 +398,38 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.btnChiTiet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnChiTiet.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnChiTiet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btnChiTiet.Location = new System.Drawing.Point(450, 500);
+            this.btnChiTiet.Location = new System.Drawing.Point(440, 500);
             this.btnChiTiet.Name = "btnChiTiet";
-            this.btnChiTiet.Size = new System.Drawing.Size(130, 34);
+            this.btnChiTiet.Size = new System.Drawing.Size(120, 34);
             this.btnChiTiet.TabIndex = 27;
             this.btnChiTiet.Text = "Chi tiết hóa đơn";
             this.btnChiTiet.UseVisualStyleBackColor = true;
             this.btnChiTiet.Click += new System.EventHandler(this.btnChiTiet_Click);
+            // 
+            // btnVietQR
+            // 
+            this.btnVietQR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnVietQR.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnVietQR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(174)))), ((int)(((byte)(96)))));
+            this.btnVietQR.Location = new System.Drawing.Point(570, 500);
+            this.btnVietQR.Name = "btnVietQR";
+            this.btnVietQR.Size = new System.Drawing.Size(155, 34);
+            this.btnVietQR.TabIndex = 28;
+            this.btnVietQR.Text = "📱 Thanh toán VietQR";
+            this.btnVietQR.UseVisualStyleBackColor = true;
+            this.btnVietQR.Click += new System.EventHandler(this.btnVietQR_Click);
+            // 
+            // btnXuatExcel
+            // 
+            this.btnXuatExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnXuatExcel.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnXuatExcel.Location = new System.Drawing.Point(735, 500);
+            this.btnXuatExcel.Name = "btnXuatExcel";
+            this.btnXuatExcel.Size = new System.Drawing.Size(125, 34);
+            this.btnXuatExcel.TabIndex = 29;
+            this.btnXuatExcel.Text = "📊 Xuất Excel";
+            this.btnXuatExcel.UseVisualStyleBackColor = true;
+            this.btnXuatExcel.Click += new System.EventHandler(this.btnXuatExcel_Click);
             // 
             // frmSalesInvoice
             // 
@@ -410,6 +437,8 @@ namespace MiniMart_windev.Forms.NghiepVu
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(900, 555);
+            this.Controls.Add(this.btnXuatExcel);
+            this.Controls.Add(this.btnVietQR);
             this.Controls.Add(this.btnChiTiet);
             this.Controls.Add(this.btnTimKiem);
             this.Controls.Add(this.btnLamMoi);
@@ -478,5 +507,7 @@ namespace MiniMart_windev.Forms.NghiepVu
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.Button btnTimKiem;
         private System.Windows.Forms.Button btnChiTiet;
+        private System.Windows.Forms.Button btnVietQR;
+        private System.Windows.Forms.Button btnXuatExcel;
     }
 }
