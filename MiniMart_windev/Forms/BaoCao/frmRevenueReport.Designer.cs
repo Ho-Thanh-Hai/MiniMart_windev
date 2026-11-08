@@ -1,4 +1,4 @@
-﻿namespace MiniMart_windev.Forms.BaoCao
+namespace MiniMart_windev.Forms.BaoCao
 {
     partial class frmRevenueReport
     {
@@ -118,7 +118,7 @@
             this.btnInBaoCao.Name = "btnInBaoCao";
             this.btnInBaoCao.Size = new System.Drawing.Size(155, 35);
             this.btnInBaoCao.TabIndex = 5;
-            this.btnInBaoCao.Text = "🖨 In Báo Cáo RDLC";
+            this.btnInBaoCao.Text = "🖨 In Báo Cáo";
             this.btnInBaoCao.UseVisualStyleBackColor = false;
             this.btnInBaoCao.Click += new System.EventHandler(this.btnInBaoCao_Click);
             // 

@@ -63,23 +63,37 @@ namespace MiniMart_windev.Forms.BaoCao
 
                     var list = query.ToList();
 
-                    int stt = 1;
-                    var reportData = list.Select(x => new
-                    {
-                        STT = stt++,
-                        MaHoaDon = "HD" + x.MaHoaDon.ToString("D5"),
-                        NgayLap = x.NgayLap.HasValue ? x.NgayLap.Value.ToString("dd/MM/yyyy HH:mm") : "",
-                        TenThuNgan = x.TenThuNgan ?? "",
-                        TenKhachHang = x.TenKhachHang ?? "",
-                        TongTien = x.TongTien,
-                        GiamGia = x.GiamGia,
-                        ThanhTien = x.ThanhTien
-                    }).ToList();
+                    DataTable dt = new DataTable("dsDoanhThu");
+                    dt.Columns.Add("STT", typeof(int));
+                    dt.Columns.Add("MaHoaDon", typeof(string));
+                    dt.Columns.Add("NgayLap", typeof(string));
+                    dt.Columns.Add("TenThuNgan", typeof(string));
+                    dt.Columns.Add("TenKhachHang", typeof(string));
+                    dt.Columns.Add("TongTien", typeof(decimal));
+                    dt.Columns.Add("GiamGia", typeof(decimal));
+                    dt.Columns.Add("ThanhTien", typeof(decimal));
 
-                    // Thiết lập parameters
+                    int stt = 1;
+                    foreach (var x in list)
+                    {
+                        dt.Rows.Add(
+                            stt++,
+                            "HD" + x.MaHoaDon.ToString("D5"),
+                            x.NgayLap.HasValue ? x.NgayLap.Value.ToString("dd/MM/yyyy HH:mm") : "",
+                            x.TenThuNgan ?? "",
+                            x.TenKhachHang ?? "",
+                            x.TongTien,
+                            x.GiamGia,
+                            x.ThanhTien
+                        );
+                    }
+
+                    // Thiết lập parameters chuẩn xác với các tham số định nghĩa trong rptDoanhThu.rdlc:
+                    // 1. TuNgay, 2. DenNgay, 3. NguoiLap, 4. NgayIn
                     string nguoiLap = !string.IsNullOrEmpty(CurrentUserSession.HoTen)
                         ? CurrentUserSession.HoTen
                         : "Quản trị viên";
+                    string ngayIn = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
 
                     reportViewer1.LocalReport.ReportEmbeddedResource = "MiniMart_windev.Forms.BaoCao.rptDoanhThu.rdlc";
                     reportViewer1.LocalReport.SetParameters(new ReportParameter[]
@@ -87,12 +101,11 @@ namespace MiniMart_windev.Forms.BaoCao
                         new ReportParameter("TuNgay", _tuNgay.ToString("dd/MM/yyyy")),
                         new ReportParameter("DenNgay", _denNgay.ToString("dd/MM/yyyy")),
                         new ReportParameter("NguoiLap", nguoiLap),
-                        new ReportParameter("TongDoanhThu", list.Sum(x => x.ThanhTien).ToString("N0") + " VNĐ"),
-                        new ReportParameter("TongDonHang", list.Count.ToString())
+                        new ReportParameter("NgayIn", ngayIn)
                     });
 
                     reportViewer1.LocalReport.DataSources.Clear();
-                    reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsDoanhThu", reportData));
+                    reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("dsDoanhThu", dt));
                     reportViewer1.SetDisplayMode(DisplayMode.PrintLayout);
                     reportViewer1.ZoomMode = ZoomMode.Percent;
                     reportViewer1.ZoomPercent = 100;
@@ -101,7 +114,12 @@ namespace MiniMart_windev.Forms.BaoCao
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi hiển thị báo cáo: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string msg = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    msg += "\nChi tiết: " + ex.InnerException.Message;
+                }
+                MessageBox.Show("Lỗi hiển thị báo cáo: " + msg, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

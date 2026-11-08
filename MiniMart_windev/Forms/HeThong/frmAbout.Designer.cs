@@ -94,7 +94,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.lblSub.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblSub.Location = new System.Drawing.Point(25, 45);
             this.lblSub.Name = "lblSub";
-            this.lblSub.Size = new System.Drawing.Size(437, 19);
+            this.lblSub.Size = new System.Drawing.Size(469, 19);
             this.lblSub.TabIndex = 1;
             this.lblSub.Text = "ĐỒ ÁN LẬP TRÌNH WINDOWS - HỆ THỐNG QUẢN LÝ SIÊU THỊ MINIMART";
             // 
@@ -105,7 +105,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.lblTieuDe.ForeColor = System.Drawing.Color.White;
             this.lblTieuDe.Location = new System.Drawing.Point(23, 12);
             this.lblTieuDe.Name = "lblTieuDe";
-            this.lblTieuDe.Size = new System.Drawing.Size(342, 30);
+            this.lblTieuDe.Size = new System.Drawing.Size(353, 30);
             this.lblTieuDe.TabIndex = 0;
             this.lblTieuDe.Text = "THÀNH VIÊN NHÓM THỰC HIỆN";
             // 
@@ -152,7 +152,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.lblMssv4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(126)))), ((int)(((byte)(34)))));
             this.lblMssv4.Location = new System.Drawing.Point(18, 55);
             this.lblMssv4.Name = "lblMssv4";
-            this.lblMssv4.Size = new System.Drawing.Size(155, 19);
+            this.lblMssv4.Size = new System.Drawing.Size(147, 19);
             this.lblMssv4.TabIndex = 1;
             this.lblMssv4.Text = "MSSV: 51.01.104.064";
             // 
@@ -163,7 +163,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.lblName4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.lblName4.Location = new System.Drawing.Point(17, 18);
             this.lblName4.Name = "lblName4";
-            this.lblName4.Size = new System.Drawing.Size(176, 25);
+            this.lblName4.Size = new System.Drawing.Size(154, 25);
             this.lblName4.TabIndex = 0;
             this.lblName4.Text = "4. Bùi Long Nhật";
             // 
@@ -183,7 +183,7 @@ namespace MiniMart_windev.Forms.HeThong
             // 
             this.lblRole3.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.lblRole3.ForeColor = System.Drawing.Color.Gray;
-            this.lblRole3.Location = new System.Drawing.Point(18, 92);
+            this.lblRole3.Location = new System.Drawing.Point(19, 92);
             this.lblRole3.Name = "lblRole3";
             this.lblRole3.Size = new System.Drawing.Size(295, 55);
             this.lblRole3.TabIndex = 2;
@@ -196,7 +196,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.lblMssv3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             this.lblMssv3.Location = new System.Drawing.Point(18, 55);
             this.lblMssv3.Name = "lblMssv3";
-            this.lblMssv3.Size = new System.Drawing.Size(155, 19);
+            this.lblMssv3.Size = new System.Drawing.Size(147, 19);
             this.lblMssv3.TabIndex = 1;
             this.lblMssv3.Text = "MSSV: 51.01.104.021";
             // 
@@ -207,7 +207,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.lblName3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.lblName3.Location = new System.Drawing.Point(17, 18);
             this.lblName3.Name = "lblName3";
-            this.lblName3.Size = new System.Drawing.Size(176, 25);
+            this.lblName3.Size = new System.Drawing.Size(150, 25);
             this.lblName3.TabIndex = 0;
             this.lblName3.Text = "3. Hồ Thanh Hải";
             // 
@@ -240,7 +240,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.lblMssv2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
             this.lblMssv2.Location = new System.Drawing.Point(18, 55);
             this.lblMssv2.Name = "lblMssv2";
-            this.lblMssv2.Size = new System.Drawing.Size(155, 19);
+            this.lblMssv2.Size = new System.Drawing.Size(147, 19);
             this.lblMssv2.TabIndex = 1;
             this.lblMssv2.Text = "MSSV: 51.01.104.032";
             // 
@@ -251,7 +251,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.lblName2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.lblName2.Location = new System.Drawing.Point(17, 18);
             this.lblName2.Name = "lblName2";
-            this.lblName2.Size = new System.Drawing.Size(258, 25);
+            this.lblName2.Size = new System.Drawing.Size(226, 25);
             this.lblName2.TabIndex = 0;
             this.lblName2.Text = "2. Nguyễn Cao Ngọc Huệ";
             // 
@@ -284,7 +284,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.lblMssv1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
             this.lblMssv1.Location = new System.Drawing.Point(18, 55);
             this.lblMssv1.Name = "lblMssv1";
-            this.lblMssv1.Size = new System.Drawing.Size(155, 19);
+            this.lblMssv1.Size = new System.Drawing.Size(147, 19);
             this.lblMssv1.TabIndex = 1;
             this.lblMssv1.Text = "MSSV: 51.01.104.024";
             // 
@@ -295,7 +295,7 @@ namespace MiniMart_windev.Forms.HeThong
             this.lblName1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
             this.lblName1.Location = new System.Drawing.Point(17, 18);
             this.lblName1.Name = "lblName1";
-            this.lblName1.Size = new System.Drawing.Size(161, 25);
+            this.lblName1.Size = new System.Drawing.Size(125, 25);
             this.lblName1.TabIndex = 0;
             this.lblName1.Text = "1. Sỳ Gia Hân";
             // 
