@@ -65,6 +65,8 @@
             this.grpVaiTro.Controls.Add(this.cboVaiTro);
             this.grpVaiTro.Controls.Add(this.label1);
             this.grpVaiTro.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpVaiTro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpVaiTro.Location = new System.Drawing.Point(15, 75);
             this.grpVaiTro.Name = "grpVaiTro";
             this.grpVaiTro.Size = new System.Drawing.Size(750, 75);
@@ -125,6 +127,9 @@
             // 
             this.grpPhanQuyen.Controls.Add(this.dgvPhanQuyen);
             this.grpPhanQuyen.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpPhanQuyen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpPhanQuyen.Location = new System.Drawing.Point(15, 160);
             this.grpPhanQuyen.Name = "grpPhanQuyen";
             this.grpPhanQuyen.Size = new System.Drawing.Size(750, 300);
@@ -186,6 +191,7 @@
             this.btnLuuPhanQuyen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLuuPhanQuyen.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLuuPhanQuyen.ForeColor = System.Drawing.Color.White;
+            this.btnLuuPhanQuyen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLuuPhanQuyen.Location = new System.Drawing.Point(585, 470);
             this.btnLuuPhanQuyen.Name = "btnLuuPhanQuyen";
             this.btnLuuPhanQuyen.Size = new System.Drawing.Size(180, 38);

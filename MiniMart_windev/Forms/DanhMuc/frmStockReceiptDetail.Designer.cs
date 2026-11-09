@@ -265,6 +265,9 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvChiTietPhieuNhap.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvChiTietPhieuNhap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvChiTietPhieuNhap.Location = new System.Drawing.Point(30, 620);
             this.dgvChiTietPhieuNhap.MultiSelect = false;
             this.dgvChiTietPhieuNhap.Name = "dgvChiTietPhieuNhap";

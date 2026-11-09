@@ -265,6 +265,9 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvNhaCungCap.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvNhaCungCap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvNhaCungCap.Location = new System.Drawing.Point(22, 504);
             this.dgvNhaCungCap.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvNhaCungCap.MultiSelect = false;

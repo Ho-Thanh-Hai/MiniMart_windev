@@ -402,13 +402,30 @@ namespace MiniMart_windev.Helpers
                 topHeader.SendToBack();
             }
 
+            // Kiểm tra xem form có phải là form hộp thoại phụ / dialog không
+            string formName = form.GetType().Name;
+            bool isDialog = form.FormBorderStyle == FormBorderStyle.FixedDialog ||
+                            formName == "frmConnectionConfig" ||
+                            formName == "frmChangePassword" ||
+                            formName == "frmVietQRDialog" ||
+                            formName == "frmAbout" ||
+                            formName == "frmLogin";
+
+            bool showBackButton = !isMain && !isDialog;
+
             Control container = form.Controls.Find("panelTop", true).Length > 0
                 ? form.Controls.Find("panelTop", true)[0]
                 : (Control)form;
 
+            int btnHeight = 28;
+            int btnThemeWidth = 95;
+            int btnBackWidth = 115;
+            int spacing = 8;
+            int neededWidth = (showBackButton ? btnBackWidth + spacing : 0) + btnThemeWidth + 16;
+
             if (container != form)
             {
-                // Đảm bảo nhãn tiêu đề trong panelTop được căn lề trái hợp lý, không bị nút đè lên
+                // Có panelTop
                 Label lblTitle = null;
                 foreach (Control ctrl in container.Controls)
                 {
@@ -421,23 +438,45 @@ namespace MiniMart_windev.Helpers
                     }
                 }
 
-                if (lblTitle != null)
+                Action adjustPanelTop = () =>
                 {
-                    int buttonsLeft = container.ClientSize.Width - 245;
-                    if (lblTitle.Right > buttonsLeft || lblTitle.Left > 25)
+                    if (container.IsDisposed || form.IsDisposed || container.ClientSize.Width <= 0) return;
+
+                    int currentBtnY = Math.Max(4, (container.ClientSize.Height - btnHeight) / 2);
+
+                    var themeBtns = container.Controls.Find("btnToggleTheme", false);
+                    if (themeBtns.Length > 0)
                     {
+                        themeBtns[0].Location = new Point(container.ClientSize.Width - btnThemeWidth - 12, currentBtnY);
+                    }
+
+                    var backBtns = container.Controls.Find("btnVeMenuChinh", false);
+                    if (backBtns.Length > 0)
+                    {
+                        backBtns[0].Location = new Point(container.ClientSize.Width - btnThemeWidth - btnBackWidth - 12 - spacing, currentBtnY);
+                    }
+
+                    if (lblTitle != null && !lblTitle.IsDisposed)
+                    {
+                        lblTitle.AutoEllipsis = true;
                         lblTitle.Left = 16;
-                        lblTitle.Top = Math.Max(10, (container.ClientSize.Height - lblTitle.Height) / 2);
-                        if (lblTitle.Font.Size > 13F)
+                        lblTitle.Top = Math.Max(2, (container.ClientSize.Height - lblTitle.Height) / 2);
+                        int maxTitleW = Math.Max(60, container.ClientSize.Width - neededWidth - 24);
+                        lblTitle.MaximumSize = new Size(maxTitleW, container.ClientSize.Height);
+                        if (lblTitle.Font.Size > 14F && container.ClientSize.Width < 700)
                         {
-                            lblTitle.Font = new Font(lblTitle.Font.FontFamily, 12.5F, FontStyle.Bold);
+                            lblTitle.Font = new Font(lblTitle.Font.FontFamily, 12F, FontStyle.Bold);
                         }
                     }
-                }
+                };
+
+                container.Resize += (s, e) => adjustPanelTop();
+                form.Shown += (s, e) => adjustPanelTop();
+                adjustPanelTop();
             }
             else
             {
-                // Khi không có panelTop, tìm nhãn tiêu đề chính của Form và tự động căn giữa ở đỉnh form
+                // Không có panelTop: Căn giữa tiêu đề chính và bảo vệ không bị đè bởi các nút
                 Label lblMainTitle = null;
                 foreach (Control ctrl in form.Controls)
                 {
@@ -452,13 +491,20 @@ namespace MiniMart_windev.Helpers
 
                 if (lblMainTitle != null)
                 {
-                    lblMainTitle.Top = 15;
+                    lblMainTitle.Anchor = AnchorStyles.None;
                     Action centerTitle = () =>
                     {
-                        if (!lblMainTitle.IsDisposed && !form.IsDisposed && form.ClientSize.Width > 0)
+                        if (lblMainTitle.IsDisposed || form.IsDisposed || form.ClientSize.Width <= 0) return;
+
+                        int rightBoundary = form.ClientSize.Width - neededWidth;
+                        int idealLeft = (form.ClientSize.Width - lblMainTitle.Width) / 2;
+
+                        if (idealLeft + lblMainTitle.Width > rightBoundary)
                         {
-                            lblMainTitle.Left = Math.Max(0, (form.ClientSize.Width - lblMainTitle.Width) / 2);
+                            idealLeft = Math.Max(12, (rightBoundary - lblMainTitle.Width) / 2);
                         }
+                        lblMainTitle.Left = Math.Max(12, idealLeft);
+                        lblMainTitle.Top = 15;
                     };
 
                     centerTitle();
@@ -467,20 +513,20 @@ namespace MiniMart_windev.Helpers
                 }
             }
 
-            int btnY = container != form ? Math.Max(6, (container.ClientSize.Height - 30) / 2) : 8;
+            int btnY = container != form ? Math.Max(4, (container.ClientSize.Height - btnHeight) / 2) : 10;
 
-            // Thêm nút Theme vào Form nếu chưa có
-            if (form.Controls.Find("btnToggleTheme", true).Length == 0)
+            // Thêm nút Theme vào Form nếu chưa có (ngoại trừ form Login)
+            if (formName != "frmLogin" && form.Controls.Find("btnToggleTheme", true).Length == 0)
             {
                 Button btnTheme = new Button
                 {
                     Name = "btnToggleTheme",
                     Text = IsDarkMode ? "Light Mode" : "Dark Mode",
-                    Size = new Size(100, 30),
+                    Size = new Size(btnThemeWidth, btnHeight),
                     Anchor = AnchorStyles.Top | AnchorStyles.Right,
                     FlatStyle = FlatStyle.Flat,
                     Cursor = Cursors.Hand,
-                    Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                    Font = new Font("Segoe UI", 8.5F, FontStyle.Bold),
                     BackColor = Color.FromArgb(52, 152, 219),
                     ForeColor = Color.White
                 };
@@ -491,23 +537,23 @@ namespace MiniMart_windev.Helpers
                     ToggleTheme();
                 };
 
-                btnTheme.Location = new Point(container.ClientSize.Width - 110, btnY);
+                btnTheme.Location = new Point(container.ClientSize.Width - btnThemeWidth - 12, btnY);
                 container.Controls.Add(btnTheme);
                 btnTheme.BringToFront();
             }
 
-            // Thêm nút Thoát ra Menu chính (cho các form con)
-            if (!isMain && form.Controls.Find("btnVeMenuChinh", true).Length == 0)
+            // Thêm nút Thoát ra Menu chính (chỉ cho các form chức năng con, không thêm cho Dialog/Popup)
+            if (showBackButton && form.Controls.Find("btnVeMenuChinh", true).Length == 0)
             {
                 Button btnBack = new Button
                 {
                     Name = "btnVeMenuChinh",
                     Text = "Về Menu Chính",
-                    Size = new Size(120, 30),
+                    Size = new Size(btnBackWidth, btnHeight),
                     Anchor = AnchorStyles.Top | AnchorStyles.Right,
                     FlatStyle = FlatStyle.Flat,
                     Cursor = Cursors.Hand,
-                    Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                    Font = new Font("Segoe UI", 8.5F, FontStyle.Bold),
                     BackColor = Color.FromArgb(231, 76, 60),
                     ForeColor = Color.White
                 };
@@ -518,7 +564,7 @@ namespace MiniMart_windev.Helpers
                     form.Close();
                 };
 
-                btnBack.Location = new Point(container.ClientSize.Width - 238, btnY);
+                btnBack.Location = new Point(container.ClientSize.Width - btnThemeWidth - btnBackWidth - 12 - spacing, btnY);
                 container.Controls.Add(btnBack);
                 btnBack.BringToFront();
             }
